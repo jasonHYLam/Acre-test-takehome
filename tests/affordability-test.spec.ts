@@ -2,7 +2,7 @@
 
 const CALCULATOR_URL =
   "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
-const TITLE = "Affordability calculator | HSBC for Intermediaries";
+const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 
 import { test, expect } from "@playwright/test";
 
