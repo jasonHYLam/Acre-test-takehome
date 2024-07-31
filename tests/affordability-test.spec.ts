@@ -1,6 +1,7 @@
 // @ts-check
 
-const CALCULATOR_URL = "https://intermediaries.hsbc.co.uk/calculator/";
+const CALCULATOR_URL =
+  "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
 const TITLE = "Affordability calculator | HSBC for Intermediaries";
 
 import { test, expect } from "@playwright/test";
