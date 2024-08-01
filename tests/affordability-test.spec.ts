@@ -140,6 +140,7 @@ test.skip("providing property value but no income results in no lending", async 
       (input.incomeDetails.foreignCurrency ||
         input.incomeDetails.foreignCurrency === false);
 
+    // Check scenarios where minimum criteria for lending are met.
     if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
       await expect(page.locator("#result-errors")).toBeHidden();
       await expect(page.locator("#lendingBasedOnProperty")).toBeVisible();
@@ -158,10 +159,37 @@ test.skip("providing property value but no income results in no lending", async 
         .textContent();
       const resultantLTVAsInt = Number(resultantLTVAsString);
 
-      // Check that lending values are greater than 0.
-      expect(resultantLTVAsInt).toBeGreaterThan(0);
-      expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
-    } else {
+      // Check that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
+      if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
+        expect(resultantLTVAsInt).toBeGreaterThan(0);
+        expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
+      }
+
+      // Check edge case where property value is 0.
+      else if (input.mortgageDetails.propertyValue === 0) {
+        await expect(page.locator("#lendingBasedOnProperty")).toContainText(
+          "0"
+        );
+        await expect(page.locator("#resultantLTV")).toContainText("0");
+        await expect(
+          page.locator("#lendingBasedOnAffordability")
+        ).toContainText("NOT AVAILABLE");
+      }
+
+      // Check all other cases where property value is between 0 and 50000.
+      else {
+        await expect(page.locator("#lendingBasedOnProperty")).toContainText(
+          "NOT AVAILABLE"
+        );
+        await expect(page.locator("#resultantLTV")).toContainText("0");
+        await expect(
+          page.locator("#lendingBasedOnAffordability")
+        ).toContainText("NOT AVAILABLE");
+      }
+    }
+
+    // Check scenarios where minimum criteria for lending are NOT met.
+    else {
       // If valid details are not provided, expect errors to be displayed.
       await expect(page.locator("#result-errors")).toBeVisible();
       await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
