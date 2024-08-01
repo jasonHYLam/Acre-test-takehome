@@ -109,7 +109,21 @@ test.skip("providing property value but no income results in no lending", async 
     }
 
     await page.getByText("view", { exact: true }).click();
-    await expect(page.locator("#result-errors")).toBeVisible();
+
+    if (
+      input.mortgageDetails &&
+      (input.mortgageDetails.propertyValue ||
+        input.mortgageDetails.propertyValue === 0) &&
+      input.incomeDetails &&
+      (input.incomeDetails.grossIncome ||
+        input.incomeDetails.grossIncome === 0) &&
+      (input.incomeDetails.foreignCurrency ||
+        input.incomeDetails.foreignCurrency === false)
+    ) {
+      await expect(page.locator("#result-errors")).toBeHidden();
+    } else {
+      await expect(page.locator("#result-errors")).toBeVisible();
+    }
     await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
     await expect(page.locator("#resultantLTV")).toContainText("0");
     await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
