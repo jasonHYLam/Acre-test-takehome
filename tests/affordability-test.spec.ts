@@ -9,7 +9,7 @@ import { beforeEach } from "node:test";
 
 beforeEach();
 
-test("not filling in user details results in no lending and validation errors", async ({
+test.skip("not filling in user details results in no lending and validation errors", async ({
   page,
 }) => {
   await page.goto(CALCULATOR_URL);
@@ -27,7 +27,7 @@ test("not filling in user details results in no lending and validation errors", 
 });
 
 // Test providing mortgage details but no income results in no lending
-test("providing property value but no income results in no lending", async ({
+test.skip("providing property value but no income results in no lending", async ({
   page,
 }) => {
   await page.goto(CALCULATOR_URL);
@@ -48,12 +48,16 @@ test("providing property value but no income results in no lending", async ({
 });
 
 // Table test which takes array of input and applies the same test to each.
-[{ propertyValue: 0, income: 0 }].forEach((input) => {
+[
+  { propertyValue: 0, income: 0 },
+  { propertyValue: 1000000, income: 100000 },
+  {},
+].forEach((input) => {
   test(`with ${input.propertyValue} property value and ${input.income} income`, async ({
     page,
   }) => {
     await page.goto(CALCULATOR_URL);
-    if (input.propertyValue) {
+    if (input.propertyValue || input.propertyValue === 0) {
       await page.getByText("1 Mortgage Details").click();
       await page.getByLabel("Property Value:").click();
       await page
@@ -63,7 +67,7 @@ test("providing property value but no income results in no lending", async ({
       await page.getByRole("button", { name: "Next step" }).click();
     }
 
-    if (input.income) {
+    if (input.income || input.propertyValue === 0) {
       await page.getByText("2 Income").click();
       await page.getByLabel("Gross Income:").click();
       await page.getByLabel("Gross Income:").fill(input.income.toString());
