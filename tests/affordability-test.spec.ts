@@ -5,6 +5,9 @@ const CALCULATOR_URL =
 const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 
 import { test, expect } from "@playwright/test";
+import { beforeEach } from "node:test";
+
+beforeEach();
 
 test("not filling in user details results in no lending and validation errors", async ({
   page,
@@ -44,4 +47,43 @@ test("providing property value but no income results in no lending", async ({
   );
 });
 
+// Table test which takes array of input and applies the same test to each.
+[{ propertyValue: 0, income: 0 }].forEach((input) => {
+  test(`with ${input.propertyValue} property value and ${input.income} income`, async ({
+    page,
+  }) => {
+    await page.goto(CALCULATOR_URL);
+    if (input.propertyValue) {
+      await page.getByText("1 Mortgage Details").click();
+      await page.getByLabel("Property Value:").click();
+      await page
+        .getByLabel("Property Value:")
+        .fill(input.propertyValue.toString());
+      await page.getByLabel("Property Value:").press("Enter");
+      await page.getByRole("button", { name: "Next step" }).click();
+    }
+
+    if (input.income) {
+      await page.getByText("2 Income").click();
+      await page.getByLabel("Gross Income:").click();
+      await page.getByLabel("Gross Income:").fill(input.income.toString());
+      await page.getByLabel("Gross Income:").press("Enter");
+      await page.getByRole("button", { name: "Next step" }).click();
+    }
+
+    await page.getByText("view", { exact: true }).click();
+    await expect(page.locator("#result-errors")).toBeVisible();
+    await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
+    await expect(page.locator("#resultantLTV")).toContainText("0");
+    await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
+      "NOT AVAILABLE"
+    );
+  });
+});
 // Test providing income but no mortgage details results in no lending
+
+// Test providing string rather than number expected input results in error
+// Test providing negative number rather than positive number expected input results in error
+
+// Test closing tab
+// Test filling input then closing tab then reopening tab
