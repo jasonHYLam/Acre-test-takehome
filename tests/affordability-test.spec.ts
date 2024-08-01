@@ -73,24 +73,25 @@ test.skip("providing property value but no income results in no lending", async 
     incomeDetails: { grossIncome: 100000 },
   },
 
-  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  // Input data for scenario where lending is not given, as propertyValue is 0.
   {
     mortgageDetails: { propertyValue: 0 },
     incomeDetails: { grossIncome: 0, foreignCurrency: false },
   },
 
-  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  // Input data for scenario where lending is not given, as propertyValue is a negative integer.
   {
     mortgageDetails: { propertyValue: -1 },
     incomeDetails: { grossIncome: 0, foreignCurrency: false },
   },
 
-  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  // Input data for scenario where lending is not given, as propertyValue is below minimum property value.
   {
     mortgageDetails: { propertyValue: 1 },
     incomeDetails: { grossIncome: 100000, foreignCurrency: false },
   },
 
+  // Input data for scenario where no details are provided.
   {},
 ].forEach((input, index) => {
   const testTitle = `Test ${index + 1}`;
@@ -191,7 +192,7 @@ test.skip("providing property value but no income results in no lending", async 
         ).toContainText("NOT AVAILABLE");
       }
 
-      // Check all other cases where property value is between 0 and 50000.
+      // Check all other cases where property value is between 0 and minimum value for lending.
       else {
         await expect(page.locator("#lendingBasedOnProperty")).toContainText(
           "NOT AVAILABLE"
