@@ -152,6 +152,21 @@ test.skip("providing property value but no income results in no lending", async 
 
     if (input.expenditureDetails) {
       await page.getByText("3 Expenditure").click();
+
+      if (
+        input.expenditureDetails.monthlyBTLOutgoings ||
+        input.expenditureDetails.monthlyBTLOutgoings === 0
+      ) {
+        await page
+          .getByRole("spinbutton", { name: "Existing Monthly BTL" })
+          .click();
+        await page
+          .getByRole("spinbutton", { name: "Existing Monthly BTL" })
+          .fill(input.expenditureDetails.monthlyBTLOutgoings.toString());
+        await page
+          .getByRole("spinbutton", { name: "Existing Monthly BTL" })
+          .press("Enter");
+      }
     }
 
     await page.getByText("view", { exact: true }).click();
