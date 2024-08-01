@@ -124,14 +124,34 @@ test.skip("providing property value but no income results in no lending", async 
 
     if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
       await expect(page.locator("#result-errors")).toBeHidden();
+      await expect(page.locator("#lendingBasedOnProperty")).toBeVisible();
+      // These values are formatted as strings when displayed on the page and must be converted to numbers for the following comparison.
+
+      const lendingBasedOnPropertyAsString = await page
+        .locator("#lendingBasedOnProperty")
+        .textContent();
+      const lendingBasedOnPropertyAsInt = Number(
+        lendingBasedOnPropertyAsString
+      );
+
+      await expect(page.locator("#resultantLTV")).toBeVisible();
+      const resultantLTVAsString = await page
+        .locator("#resultantLTV")
+        .textContent();
+      const resultantLTVAsInt = Number(resultantLTVAsString);
+
+      // Check that lending values are greater than 0.
+      expect(resultantLTVAsInt).toBeGreaterThan(0);
+      expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
     } else {
+      // If valid details are not provided, expect errors to be displayed.
       await expect(page.locator("#result-errors")).toBeVisible();
+      await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
+      await expect(page.locator("#resultantLTV")).toContainText("0");
+      await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
+        "NOT AVAILABLE"
+      );
     }
-    await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
-    await expect(page.locator("#resultantLTV")).toContainText("0");
-    await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
-      "NOT AVAILABLE"
-    );
   });
 });
 // Test providing income but no mortgage details results in no lending
