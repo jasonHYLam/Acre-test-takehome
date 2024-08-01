@@ -63,11 +63,8 @@ test.skip("providing property value but no income results in no lending", async 
   },
   {},
 ].forEach((input, index) => {
-  test(`Test ${index + 1} with ${
-    input.mortgageDetails.propertyValue
-  } property value and ${input.incomeDetails.grossIncome} income`, async ({
-    page,
-  }) => {
+  const testTitle = `Test ${index + 1}`;
+  test(testTitle, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
     if (input.mortgageDetails) {
       if (
