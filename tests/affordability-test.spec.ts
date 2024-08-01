@@ -48,12 +48,21 @@ test.skip("providing property value but no income results in no lending", async 
 });
 
 // Table test which takes array of input and applies the same test to each.
+// Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 [
-  { mortgageDetails: { propertyValue: 0 }, incomeDetails: { grossIncome: 0 } },
+  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  {
+    mortgageDetails: { propertyValue: 0 },
+    incomeDetails: { grossIncome: 0, foreignCurrency: false },
+  },
+
+  // Input data for scenario where lending is not given, as foreignCurrency is not provided.
   {
     mortgageDetails: { propertyValue: 1000000 },
     incomeDetails: { grossIncome: 100000 },
   },
+
+  // Input data for scenario where lending is given, as minimum details for lending are given.
   {
     mortgageDetails: { propertyValue: 1000000 },
     incomeDetails: {
@@ -125,8 +134,8 @@ test.skip("providing property value but no income results in no lending", async 
     if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
       await expect(page.locator("#result-errors")).toBeHidden();
       await expect(page.locator("#lendingBasedOnProperty")).toBeVisible();
-      // These values are formatted as strings when displayed on the page and must be converted to numbers for the following comparison.
 
+      // These values are formatted as strings when displayed on the page and must be converted to numbers for the following comparison.
       const lendingBasedOnPropertyAsString = await page
         .locator("#lendingBasedOnProperty")
         .textContent();
