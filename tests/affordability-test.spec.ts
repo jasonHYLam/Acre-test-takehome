@@ -69,9 +69,14 @@ test.skip("providing property value but no income results in no lending", async 
 
     if (input.income || input.propertyValue === 0) {
       await page.getByText("2 Income").click();
-      await page.getByLabel("Gross Income:").click();
-      await page.getByLabel("Gross Income:").fill(input.income.toString());
-      await page.getByLabel("Gross Income:").press("Enter");
+      await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
+      await page
+        .getByRole("spinbutton", { name: "Gross Income:" })
+        .fill("100000");
+      await page
+        .getByRole("spinbutton", { name: "Gross Income:" })
+        .press("Enter");
+
       await page.getByRole("button", { name: "Next step" }).click();
     }
 
