@@ -49,32 +49,36 @@ test.skip("providing property value but no income results in no lending", async 
 
 // Table test which takes array of input and applies the same test to each.
 [
-  { propertyValue: 0, income: 0 },
-  { propertyValue: 1000000, income: 100000 },
+  { mortgage: { propertyValue: 0 }, income: { grossIncome: 0 } },
+  { mortgage: { propertyValue: 1000000 }, income: { grossIncome: 100000 } },
   {},
 ].forEach((input) => {
-  test(`with ${input.propertyValue} property value and ${input.income} income`, async ({
+  test(`with ${input.mortgage.propertyValue} property value and ${input.income.grossIncome} income`, async ({
     page,
   }) => {
     await page.goto(CALCULATOR_URL);
-    if (input.propertyValue || input.propertyValue === 0) {
-      await page.getByText("1 Mortgage Details").click();
-      await page.getByLabel("Property Value:").click();
-      await page
-        .getByLabel("Property Value:")
-        .fill(input.propertyValue.toString());
-      await page.getByLabel("Property Value:").press("Enter");
+    if (input.mortgage) {
+      if (input.mortgage.propertyValue || input.mortgage.propertyValue === 0) {
+        await page.getByText("1 Mortgage Details").click();
+        await page.getByLabel("Property Value:").click();
+        await page
+          .getByLabel("Property Value:")
+          .fill(input.mortgage.propertyValue.toString());
+        await page.getByLabel("Property Value:").press("Enter");
+      }
     }
 
-    if (input.income || input.propertyValue === 0) {
-      await page.getByText("2 Income").click();
-      await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
-      await page
-        .getByRole("spinbutton", { name: "Gross Income:" })
-        .fill("100000");
-      await page
-        .getByRole("spinbutton", { name: "Gross Income:" })
-        .press("Enter");
+    if (input.income) {
+      if (input.income.grossIncome || input.income.grossIncome === 0) {
+        await page.getByText("2 Income").click();
+        await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
+        await page
+          .getByRole("spinbutton", { name: "Gross Income:" })
+          .fill("100000");
+        await page
+          .getByRole("spinbutton", { name: "Gross Income:" })
+          .press("Enter");
+      }
     }
 
     await page.getByText("view", { exact: true }).click();
