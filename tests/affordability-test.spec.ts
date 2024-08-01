@@ -67,6 +67,13 @@ test.skip("providing property value but no income results in no lending", async 
     },
   },
 
+  // Input data for scenario where lending is not given, as expenditure is too great.
+  {
+    mortgageDetails: { propertyValue: 1000000 },
+    incomeDetails: { grossIncome: 100000 },
+    expenditureDetails: {},
+  },
+
   // Input data for scenario where lending is not given, as foreignCurrency is not provided.
   {
     mortgageDetails: { propertyValue: 1000000 },
@@ -137,6 +144,10 @@ test.skip("providing property value but no income results in no lending", async 
           .filter({ hasText: "No" })
           .click();
       }
+    }
+
+    if (input.expenditureDetails) {
+      await page.getByText("3 Expenditure").click();
     }
 
     await page.getByText("view", { exact: true }).click();
