@@ -58,11 +58,14 @@ test.skip("providing property value but no income results in no lending", async 
     mortgageDetails: { propertyValue: 1000000 },
     incomeDetails: {
       grossIncome: 100000,
+      foreignCurrency: false,
     },
   },
   {},
-].forEach((input) => {
-  test(`with ${input.mortgageDetails.propertyValue} property value and ${input.incomeDetails.grossIncome} income`, async ({
+].forEach((input, index) => {
+  test(`Test ${index + 1} with ${
+    input.mortgageDetails.propertyValue
+  } property value and ${input.incomeDetails.grossIncome} income`, async ({
     page,
   }) => {
     await page.goto(CALCULATOR_URL);
@@ -93,6 +96,18 @@ test.skip("providing property value but no income results in no lending", async 
         await page
           .getByRole("spinbutton", { name: "Gross Income:" })
           .press("Enter");
+      }
+
+      if (
+        input.incomeDetails.foreignCurrency ||
+        input.incomeDetails.foreignCurrency === false
+      ) {
+        await page.getByRole("button", { name: "Nothing selected" }).click();
+        await page
+          .getByRole("menu")
+          .locator("a")
+          .filter({ hasText: "No" })
+          .click();
       }
     }
 
