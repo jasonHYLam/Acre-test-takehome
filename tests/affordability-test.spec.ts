@@ -6,6 +6,8 @@ const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 
 // The minimum property value required for lending for the HSBC affordability calculator for intermediaries. This may vary for different calculators.
 const MIN_PROPERTY_VALUE = 50000;
+// The minimum income value required for lending using the HSBC affordability calculator for intermediaries.
+const MIN_INCOME_VALUE = 9997;
 
 // TODO: Set value for expenditure that causes 0 lending
 
@@ -204,6 +206,8 @@ test.skip("providing property value but no income results in no lending", async 
 
       // Check that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
       if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
+        // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
+        // ^ This might be based on ratio of income to expenditure...
         expect(resultantLTVAsInt).toBeGreaterThan(0);
         expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
       }
@@ -247,9 +251,3 @@ test.skip("providing property value but no income results in no lending", async 
   });
 });
 // Test providing income but no mortgage details results in no lending
-
-// Test providing string rather than number expected input results in error
-// Test providing negative number rather than positive number expected input results in error
-
-// Test closing tab
-// Test filling input then closing tab then reopening tab
