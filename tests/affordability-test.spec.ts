@@ -4,6 +4,8 @@ const CALCULATOR_URL =
   "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
 const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 
+const MIN_PROPERTY_VALUE = 50000;
+
 import { test, expect } from "@playwright/test";
 import { beforeEach } from "node:test";
 
@@ -50,18 +52,6 @@ test.skip("providing property value but no income results in no lending", async 
 // Table test which takes array of input and applies the same test to each.
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 [
-  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
-  {
-    mortgageDetails: { propertyValue: 0 },
-    incomeDetails: { grossIncome: 0, foreignCurrency: false },
-  },
-
-  // Input data for scenario where lending is not given, as foreignCurrency is not provided.
-  {
-    mortgageDetails: { propertyValue: 1000000 },
-    incomeDetails: { grossIncome: 100000 },
-  },
-
   // Input data for scenario where lending is given, as minimum details for lending are given.
   {
     mortgageDetails: { propertyValue: 1000000 },
@@ -70,6 +60,25 @@ test.skip("providing property value but no income results in no lending", async 
       foreignCurrency: false,
     },
   },
+
+  // Input data for scenario where lending is not given, as foreignCurrency is not provided.
+  {
+    mortgageDetails: { propertyValue: 1000000 },
+    incomeDetails: { grossIncome: 100000 },
+  },
+
+  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  {
+    mortgageDetails: { propertyValue: 0 },
+    incomeDetails: { grossIncome: 0, foreignCurrency: false },
+  },
+
+  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  {
+    mortgageDetails: { propertyValue: 1 },
+    incomeDetails: { grossIncome: 100000, foreignCurrency: false },
+  },
+
   {},
 ].forEach((input, index) => {
   const testTitle = `Test ${index + 1}`;
