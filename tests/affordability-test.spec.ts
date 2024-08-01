@@ -4,6 +4,7 @@ const CALCULATOR_URL =
   "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
 const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 
+// The minimum property value required for lending for the HSBC affordability calculator for intermediaries. This may vary for different calculators.
 const MIN_PROPERTY_VALUE = 50000;
 
 import { test, expect } from "@playwright/test";
@@ -48,6 +49,11 @@ test.skip("providing property value but no income results in no lending", async 
     "NOT AVAILABLE"
   );
 });
+
+// TODO: Add input for expenditure, and create branch for that
+// TODO: Add to income and mortgage details
+// TODO: Consider average user; 30-40 years old, etc.
+// TODO: Case where expenditure is great enough to cause no lending
 
 // Table test which takes array of input and applies the same test to each.
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
@@ -165,8 +171,12 @@ test.skip("providing property value but no income results in no lending", async 
         expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
       }
 
+      // TODO: Check more generally for <= 0
       // Check edge case where property value is 0.
       else if (input.mortgageDetails.propertyValue === 0) {
+        // TODO: Check for The Property Value field needs to be a numeric value, equal to, or higher than 1 error
+        await expect(page.locator("#result-errors")).toBeVisible();
+
         await expect(page.locator("#lendingBasedOnProperty")).toContainText(
           "0"
         );
