@@ -7,6 +7,10 @@ const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 // The minimum property value required for lending for the HSBC affordability calculator for intermediaries. This may vary for different calculators.
 const MIN_PROPERTY_VALUE = 50000;
 
+// TODO: Set value for expenditure that causes 0 lending
+
+// TODO: Perhaps set ratio for income/expenditure
+
 import { test, expect } from "@playwright/test";
 import { beforeEach } from "node:test";
 
@@ -71,7 +75,7 @@ test.skip("providing property value but no income results in no lending", async 
   {
     mortgageDetails: { propertyValue: 1000000 },
     incomeDetails: { grossIncome: 100000 },
-    expenditureDetails: {},
+    expenditureDetails: { monthlyBTLOutgoings: 3700 },
   },
 
   // Input data for scenario where lending is not given, as foreignCurrency is not provided.
