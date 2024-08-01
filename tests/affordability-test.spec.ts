@@ -67,11 +67,11 @@ test.skip("providing property value but no income results in no lending", async 
   test(testTitle, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
     if (input.mortgageDetails) {
+      await page.getByText("1 Mortgage Details").click();
       if (
         input.mortgageDetails.propertyValue ||
         input.mortgageDetails.propertyValue === 0
       ) {
-        await page.getByText("1 Mortgage Details").click();
         await page.getByLabel("Property Value:").click();
         await page
           .getByLabel("Property Value:")
@@ -81,11 +81,11 @@ test.skip("providing property value but no income results in no lending", async 
     }
 
     if (input.incomeDetails) {
+      await page.getByText("2 Income").click();
       if (
         input.incomeDetails.grossIncome ||
         input.incomeDetails.grossIncome === 0
       ) {
-        await page.getByText("2 Income").click();
         await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
         await page
           .getByRole("spinbutton", { name: "Gross Income:" })
