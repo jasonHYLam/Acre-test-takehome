@@ -110,16 +110,19 @@ test.skip("providing property value but no income results in no lending", async 
 
     await page.getByText("view", { exact: true }).click();
 
-    if (
+    const validMortgageDetailsForLending =
       input.mortgageDetails &&
       (input.mortgageDetails.propertyValue ||
-        input.mortgageDetails.propertyValue === 0) &&
+        input.mortgageDetails.propertyValue === 0);
+
+    const validIncomeDetailsForLending =
       input.incomeDetails &&
       (input.incomeDetails.grossIncome ||
         input.incomeDetails.grossIncome === 0) &&
       (input.incomeDetails.foreignCurrency ||
-        input.incomeDetails.foreignCurrency === false)
-    ) {
+        input.incomeDetails.foreignCurrency === false);
+
+    if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
       await expect(page.locator("#result-errors")).toBeHidden();
     } else {
       await expect(page.locator("#result-errors")).toBeVisible();
