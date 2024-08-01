@@ -81,6 +81,12 @@ test.skip("providing property value but no income results in no lending", async 
 
   // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
   {
+    mortgageDetails: { propertyValue: -1 },
+    incomeDetails: { grossIncome: 0, foreignCurrency: false },
+  },
+
+  // Input data for scenario where lending is not given, as provertyValue and grossIncome are too low.
+  {
     mortgageDetails: { propertyValue: 1 },
     incomeDetails: { grossIncome: 100000, foreignCurrency: false },
   },
@@ -171,10 +177,9 @@ test.skip("providing property value but no income results in no lending", async 
         expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
       }
 
-      // TODO: Check more generally for <= 0
-      // Check edge case where property value is 0.
-      else if (input.mortgageDetails.propertyValue === 0) {
-        // TODO: Check for The Property Value field needs to be a numeric value, equal to, or higher than 1 error
+      // Check edge case where property value is less than or equal to 0.
+      else if (input.mortgageDetails.propertyValue <= 0) {
+        // Error text is displayed when property value is less than or equal to 0.
         await expect(page.locator("#result-errors")).toBeVisible();
 
         await expect(page.locator("#lendingBasedOnProperty")).toContainText(
