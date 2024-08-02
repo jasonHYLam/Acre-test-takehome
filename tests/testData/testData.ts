@@ -75,3 +75,7 @@ interface IncomeDetails {
   grossIncome?: number;
   foreignCurrency?: boolean;
 }
+
+interface ExpenditureDetails {
+  monthlyBTLOutgoings?: number;
+}
