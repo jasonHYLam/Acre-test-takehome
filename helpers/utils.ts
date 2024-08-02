@@ -6,6 +6,7 @@ export function checkValidMortgageDetailsForLending(
   if (providedDetails.mortgageDetails) {
     return providedDetails.mortgageDetails !== null;
   }
+  return false;
 }
 
 export function checkValidIncomeDetailsForLending(
@@ -25,7 +26,9 @@ export function checkValidIncomeDetailsForLending(
         );
       }
     }
+    return false;
   }
+  return false;
 }
 
 function checkValidIncomeDetailsForLendingForSoleMortgage(
