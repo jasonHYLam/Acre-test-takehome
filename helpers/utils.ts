@@ -57,3 +57,7 @@ function checkValidIncomeDetailsForLendingForJointMortgage(
     applicant2IncomeDetails !== null
   );
 }
+
+// TODO: Calculate total income
+
+// TODO: Calculate total expenditure

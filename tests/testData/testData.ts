@@ -1,5 +1,8 @@
 import { ProvidedDetails } from "../../helpers/types";
 // Input data is an array containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
+
+// TODO: Set value for expenditure that causes 0 lending
+// TODO: Consider average user; 30-40 years old, etc.
 export const testData: ProvidedDetails[] = [
   // Input data for scenario where lending is given, as minimum details for lending are given.
   {
