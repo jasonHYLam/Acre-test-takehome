@@ -70,3 +70,8 @@ interface MortgageDetails {
   maxLTV?: number;
   mortgageTerm?: number;
 }
+
+interface IncomeDetails {
+  grossIncome: number;
+  foreignCurrency: boolean;
+}
