@@ -89,6 +89,11 @@ interface MortgageDetails {
   propertyPostcode?: string;
 }
 
+interface AllIncomeDetails {
+  applicant1IncomeDetails: IncomeDetails;
+  applicant2IncomeDetails: IncomeDetails;
+}
+
 interface IncomeDetails {
   grossIncome?: number;
   foreignCurrency?: ForeignCurrency;
