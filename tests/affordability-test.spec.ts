@@ -99,6 +99,8 @@ testData.forEach((input, index) => {
         input.mortgageDetails.propertyValue === 0);
 
     input.mortgageDetails?.jointMortgage ? null : null;
+
+    // TODO: Determine valid income. This depends on whether Mortage is Sole or Joint.
     const validIncomeDetailsForLending =
       input.incomeDetails &&
       (input.incomeDetails.grossIncome ||
