@@ -105,6 +105,12 @@ interface IncomeDetails {
 
 interface ExpenditureDetails {
   monthlyBTLOutgoings?: number;
+  monthlyLoanPayments?: number;
+  creditCards?: number;
+  groundRent?: number;
+  travel?: number;
+  childCareCosts?: number;
+  otherExpenditure?: number;
 }
 
 type MaxLTV = 0.85 | 0.9 | 0.95;
