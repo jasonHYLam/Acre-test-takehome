@@ -64,6 +64,12 @@ export const testData = [
   {},
 ];
 
+interface User {
+  mortgageDetails?: MortgageDetails;
+  incomeDetails?: IncomeDetails;
+  expenditureDetails?: ExpenditureDetails;
+}
+
 interface MortgageDetails {
   propertyValue?: number;
   jointMortgage?: boolean;
