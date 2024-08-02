@@ -88,4 +88,4 @@ interface ExpenditureDetails {
 
 type MaxLTV = 0.85 | 0.9 | 0.95;
 
-type ForeignCurrency = 0 | 0.1 | 0.2 | 0.3;
+type ForeignCurrency = false | 0.1 | 0.2 | 0.3;
