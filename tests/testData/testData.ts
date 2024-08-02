@@ -73,15 +73,19 @@ interface ProvidedDetails {
 interface MortgageDetails {
   propertyValue?: number;
   jointMortgage?: boolean;
-  maxLTV?: number;
+  maxLTV?: MaxLTV;
   mortgageTerm?: number;
 }
 
 interface IncomeDetails {
   grossIncome?: number;
-  foreignCurrency?: boolean;
+  foreignCurrency?: ForeignCurrency;
 }
 
 interface ExpenditureDetails {
   monthlyBTLOutgoings?: number;
 }
+
+type MaxLTV = 0.85 | 0.9 | 0.95;
+
+type ForeignCurrency = 0 | 0.1 | 0.2 | 0.3;
