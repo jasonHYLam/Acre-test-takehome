@@ -72,6 +72,6 @@ interface MortgageDetails {
 }
 
 interface IncomeDetails {
-  grossIncome: number;
-  foreignCurrency: boolean;
+  grossIncome?: number;
+  foreignCurrency?: boolean;
 }
