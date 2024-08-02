@@ -116,37 +116,39 @@ testData.forEach((input, index) => {
       const resultantLTVAsInt = Number(resultantLTVAsString);
 
       // Check that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
-      if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
-        // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
-        // ^ This might be based on ratio of income to expenditure...
-        // if (input.expenditureDetails) {
-        //   expect(resultantLTVAsString).toContain()
-        // }
-        expect(resultantLTVAsInt).toBeGreaterThan(0);
-        expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
-      }
+      if (input.mortgageDetails && input.mortgageDetails.propertyValue) {
+        if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
+          // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
+          // ^ This might be based on ratio of income to expenditure...
+          // if (input.expenditureDetails) {
+          //   expect(resultantLTVAsString).toContain()
+          // }
+          expect(resultantLTVAsInt).toBeGreaterThan(0);
+          expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
+        }
 
-      // Check edge case where property value is less than or equal to 0.
-      else if (input.mortgageDetails.propertyValue <= 0) {
-        await expect(page.locator("#result-errors")).toBeVisible();
-        await expect(page.locator("#lendingBasedOnProperty")).toContainText(
-          "0"
-        );
-        await expect(page.locator("#resultantLTV")).toContainText("0");
-        await expect(
-          page.locator("#lendingBasedOnAffordability")
-        ).toContainText("NOT AVAILABLE");
-      }
+        // Check edge case where property value is less than or equal to 0.
+        else if (input.mortgageDetails.propertyValue <= 0) {
+          await expect(page.locator("#result-errors")).toBeVisible();
+          await expect(page.locator("#lendingBasedOnProperty")).toContainText(
+            "0"
+          );
+          await expect(page.locator("#resultantLTV")).toContainText("0");
+          await expect(
+            page.locator("#lendingBasedOnAffordability")
+          ).toContainText("NOT AVAILABLE");
+        }
 
-      // Check all other cases where property value is between 0 and minimum value for lending.
-      else {
-        await expect(page.locator("#lendingBasedOnProperty")).toContainText(
-          "NOT AVAILABLE"
-        );
-        await expect(page.locator("#resultantLTV")).toContainText("0");
-        await expect(
-          page.locator("#lendingBasedOnAffordability")
-        ).toContainText("NOT AVAILABLE");
+        // Check all other cases where property value is between 0 and minimum value for lending.
+        else {
+          await expect(page.locator("#lendingBasedOnProperty")).toContainText(
+            "NOT AVAILABLE"
+          );
+          await expect(page.locator("#resultantLTV")).toContainText("0");
+          await expect(
+            page.locator("#lendingBasedOnAffordability")
+          ).toContainText("NOT AVAILABLE");
+        }
       }
     }
 
