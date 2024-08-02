@@ -63,3 +63,10 @@ export const testData = [
   // Input data for scenario where no details are provided.
   {},
 ];
+
+interface MortgageDetails {
+  propertyValue?: number;
+  jointMortgage?: boolean;
+  maxLTV?: number;
+  mortgageTerm?: number;
+}
