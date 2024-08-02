@@ -1,6 +1,14 @@
 import { ProvidedDetails, AllIncomeDetails } from "./types";
 
-export async function checkValidIncomeDetailsForLending(
+export function checkValidMortgageDetailsForLending(
+  providedDetails: ProvidedDetails
+) {
+  if (providedDetails.mortgageDetails) {
+    return providedDetails.mortgageDetails !== null;
+  }
+}
+
+export function checkValidIncomeDetailsForLending(
   providedDetails: ProvidedDetails
 ) {
   if (providedDetails.mortgageDetails) {
