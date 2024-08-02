@@ -28,7 +28,7 @@ export const testData: ProvidedDetails[] = [
     },
   },
 
-  // Input data for scenario where lending is not given, as expenditure is too great.
+  // Input data for scenario where lending is not given, as income is too low compared to property value.
   {
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {

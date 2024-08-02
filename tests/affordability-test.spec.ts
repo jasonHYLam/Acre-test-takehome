@@ -8,8 +8,12 @@ import {
   TITLE,
   MIN_PROPERTY_VALUE,
   MIN_INCOME_VALUE,
+  MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING,
 } from "../helpers/constants";
-import { checkValidIncomeDetailsForLending } from "../helpers/utils";
+import {
+  checkValidIncomeDetailsForLending,
+  checkValidMortgageDetailsForLending,
+} from "../helpers/utils";
 
 // TODO: Set value for expenditure that causes 0 lending
 // TODO: Perhaps set ratio for income/expenditure
@@ -95,13 +99,7 @@ testData.forEach((input, index) => {
     await page.getByText("view", { exact: true }).click();
 
     const validMortgageDetailsForLending =
-      input.mortgageDetails &&
-      (input.mortgageDetails.propertyValue ||
-        input.mortgageDetails.propertyValue === 0);
-
-    input.mortgageDetails?.jointMortgage ? null : null;
-
-    // TODO: Determine valid income. This depends on whether Mortage is Sole or Joint.
+      checkValidMortgageDetailsForLending(input);
 
     const validIncomeDetailsForLending =
       checkValidIncomeDetailsForLending(input);
@@ -126,15 +124,29 @@ testData.forEach((input, index) => {
       const resultantLTVAsInt = Number(resultantLTVAsString);
 
       // Check that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
-      if (input.mortgageDetails && input.mortgageDetails.propertyValue) {
+      if (input.mortgageDetails?.propertyValue) {
         if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
-          // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
-          // ^ This might be based on ratio of income to expenditure...
-          // if (input.expenditureDetails) {
-          //   expect(resultantLTVAsString).toContain()
-          // }
-          expect(resultantLTVAsInt).toBeGreaterThan(0);
-          expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
+          // Case where income is too low compared to property value.
+          // TODO: Change to total income rather than gross income.
+          // ^ May require function to calculate at the start.
+          if (input.allIncomeDetails?.applicant1IncomeDetails?.grossIncome) {
+            const { grossIncome } =
+              input.allIncomeDetails.applicant1IncomeDetails;
+            if (
+              grossIncome / input.mortgageDetails.propertyValue <
+              MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING
+            ) {
+              expect(resultantLTVAsInt).toBe(0);
+            }
+            // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
+            // ^ This might be based on ratio of income to expenditure...
+            // if (input.expenditureDetails) {
+            //   expect(resultantLTVAsString).toContain()
+            // }
+          } else {
+            expect(resultantLTVAsInt).toBeGreaterThan(0);
+            expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
+          }
         }
 
         // Check edge case where property value is less than or equal to 0.
