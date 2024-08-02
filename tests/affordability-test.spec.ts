@@ -8,7 +8,7 @@ import {
   TITLE,
   MIN_PROPERTY_VALUE,
   MIN_INCOME_VALUE,
-} from "../constants";
+} from "../helpers/constants";
 
 // TODO: Set value for expenditure that causes 0 lending
 // TODO: Perhaps set ratio for income/expenditure
