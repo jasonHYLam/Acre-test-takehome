@@ -6,7 +6,7 @@ Takehome assignment for Acre test role.
 
 I have used the Playwright library for its ease of end-to-end testing, and wrote the tests specifically for the HSBC affordability calculator.
 
-I have written table-driven tests as directed by the assignment. However I would have otherwise written individual tests.
+I have written table-driven tests as directed by the assignment. The table-driven test style uses a collection of input data, loops through it and performs the same test for each loop iteration. To handle different scenarios, there are many if statements to create different branches of execution. However I would have otherwise written individual tests.
 
 The input data is provided in the `inputData.ts` file. I believe this would suffice for a takehome assignment as I have interpreted the purpose of the assignment to focus more on the data's types and range rather than the way it is setup, however in a real-world scenario I would obtain the data from a database.
 
