@@ -98,6 +98,7 @@ testData.forEach((input, index) => {
       (input.mortgageDetails.propertyValue ||
         input.mortgageDetails.propertyValue === 0);
 
+    input.mortgageDetails?.jointMortgage ? null : null;
     const validIncomeDetailsForLending =
       input.incomeDetails &&
       (input.incomeDetails.grossIncome ||
