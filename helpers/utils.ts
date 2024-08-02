@@ -20,7 +20,7 @@ export async function checkValidIncomeDetailsForLending(
   }
 }
 
-async function checkValidIncomeDetailsForLendingForSoleMortgage(
+function checkValidIncomeDetailsForLendingForSoleMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
   const { applicant1IncomeDetails } = allIncomeDetails;
@@ -32,7 +32,7 @@ async function checkValidIncomeDetailsForLendingForSoleMortgage(
   );
 }
 
-async function checkValidIncomeDetailsForLendingForJointMortgage(
+function checkValidIncomeDetailsForLendingForJointMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
   const { applicant1IncomeDetails, applicant2IncomeDetails } = allIncomeDetails;

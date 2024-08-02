@@ -9,6 +9,7 @@ import {
   MIN_PROPERTY_VALUE,
   MIN_INCOME_VALUE,
 } from "../helpers/constants";
+import { checkValidIncomeDetailsForLending } from "../helpers/utils";
 
 // TODO: Set value for expenditure that causes 0 lending
 // TODO: Perhaps set ratio for income/expenditure
@@ -101,12 +102,9 @@ testData.forEach((input, index) => {
     input.mortgageDetails?.jointMortgage ? null : null;
 
     // TODO: Determine valid income. This depends on whether Mortage is Sole or Joint.
+
     const validIncomeDetailsForLending =
-      input.incomeDetails &&
-      (input.incomeDetails.grossIncome ||
-        input.incomeDetails.grossIncome === 0) &&
-      (input.incomeDetails.foreignCurrency ||
-        input.incomeDetails.foreignCurrency === false);
+      checkValidIncomeDetailsForLending(input);
 
     // Check scenarios where minimum criteria for lending are met.
     if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
