@@ -92,6 +92,10 @@ interface MortgageDetails {
 interface IncomeDetails {
   grossIncome?: number;
   foreignCurrency?: ForeignCurrency;
+  additionalIncome?: number;
+  limitedCompanyNetProfits?: number;
+  otherNonTaxableIncome?: number;
+  existingBTLRentalIncome?: number;
 }
 
 interface ExpenditureDetails {
