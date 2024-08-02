@@ -1,5 +1,7 @@
 // @ts-check
 
+import { test, expect } from "@playwright/test";
+
 const CALCULATOR_URL =
   "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
 const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
@@ -12,49 +14,6 @@ const MIN_INCOME_VALUE = 9997;
 // TODO: Set value for expenditure that causes 0 lending
 
 // TODO: Perhaps set ratio for income/expenditure
-
-import { test, expect } from "@playwright/test";
-import { beforeEach } from "node:test";
-
-beforeEach();
-
-test.skip("not filling in user details results in no lending and validation errors", async ({
-  page,
-}) => {
-  await page.goto(CALCULATOR_URL);
-  await expect(page).toHaveTitle(TITLE);
-
-  await page.getByText("view", { exact: true }).click();
-
-  await expect(page.getByText("The Any element of foreign")).toBeVisible();
-  await expect(page.getByText("The Property Value field")).toBeVisible();
-  await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
-  await expect(page.locator("#resultantLTV")).toContainText("0");
-  await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
-    "NOT AVAILABLE"
-  );
-});
-
-// Test providing mortgage details but no income results in no lending
-test.skip("providing property value but no income results in no lending", async ({
-  page,
-}) => {
-  await page.goto(CALCULATOR_URL);
-  await expect(page).toHaveTitle(TITLE);
-
-  await page.getByText("1 Mortgage Details").click();
-  await page.getByLabel("Property Value:").click();
-  await page.getByLabel("Property Value:").fill("1000000");
-  await page.getByLabel("Property Value:").press("Enter");
-  await page.getByRole("button", { name: "Next step" }).click();
-  await page.getByText("view", { exact: true }).click();
-  await expect(page.locator("#result-errors")).toBeVisible();
-  await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
-  await expect(page.locator("#resultantLTV")).toContainText("0");
-  await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
-    "NOT AVAILABLE"
-  );
-});
 
 // TODO: Add input for expenditure, and create branch for that
 // TODO: Add to income and mortgage details
@@ -71,6 +30,12 @@ test.skip("providing property value but no income results in no lending", async 
       grossIncome: 100000,
       foreignCurrency: false,
     },
+  },
+
+  // Input data for scenario where lending is not given, as expenditure is too great.
+  {
+    mortgageDetails: { propertyValue: 1000000 },
+    incomeDetails: { grossIncome: 10000, foreignCurrency: false },
   },
 
   // Input data for scenario where lending is not given, as expenditure is too great.
@@ -250,4 +215,41 @@ test.skip("providing property value but no income results in no lending", async 
     }
   });
 });
-// Test providing income but no mortgage details results in no lending
+
+test.skip("not filling in user details results in no lending and validation errors", async ({
+  page,
+}) => {
+  await page.goto(CALCULATOR_URL);
+  await expect(page).toHaveTitle(TITLE);
+
+  await page.getByText("view", { exact: true }).click();
+
+  await expect(page.getByText("The Any element of foreign")).toBeVisible();
+  await expect(page.getByText("The Property Value field")).toBeVisible();
+  await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
+  await expect(page.locator("#resultantLTV")).toContainText("0");
+  await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
+    "NOT AVAILABLE"
+  );
+});
+
+// Test providing mortgage details but no income results in no lending
+test.skip("providing property value but no income results in no lending", async ({
+  page,
+}) => {
+  await page.goto(CALCULATOR_URL);
+  await expect(page).toHaveTitle(TITLE);
+
+  await page.getByText("1 Mortgage Details").click();
+  await page.getByLabel("Property Value:").click();
+  await page.getByLabel("Property Value:").fill("1000000");
+  await page.getByLabel("Property Value:").press("Enter");
+  await page.getByRole("button", { name: "Next step" }).click();
+  await page.getByText("view", { exact: true }).click();
+  await expect(page.locator("#result-errors")).toBeVisible();
+  await expect(page.locator("#lendingBasedOnProperty")).toContainText("0");
+  await expect(page.locator("#resultantLTV")).toContainText("0");
+  await expect(page.locator("#lendingBasedOnAffordability")).toContainText(
+    "NOT AVAILABLE"
+  );
+});
