@@ -1,6 +1,5 @@
-// Table test which takes array of input and applies the same test to each.
-// Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
-[
+// Input data is an array containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
+export const testData = [
   // Input data for scenario where lending is given, as minimum details for lending are given.
   {
     mortgageDetails: { propertyValue: 1000000 },
