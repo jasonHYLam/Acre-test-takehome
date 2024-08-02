@@ -3,14 +3,12 @@
 import { test, expect } from "@playwright/test";
 import { testData } from "./testData/testData";
 
-const CALCULATOR_URL =
-  "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
-const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
-
-// The minimum property value required for lending for the HSBC affordability calculator for intermediaries. This may vary for different calculators.
-const MIN_PROPERTY_VALUE = 50000;
-// The minimum income value required for lending using the HSBC affordability calculator for intermediaries.
-const MIN_INCOME_VALUE = 9997;
+import {
+  CALCULATOR_URL,
+  TITLE,
+  MIN_PROPERTY_VALUE,
+  MIN_INCOME_VALUE,
+} from "../constants";
 
 // TODO: Set value for expenditure that causes 0 lending
 // TODO: Perhaps set ratio for income/expenditure
@@ -121,15 +119,16 @@ testData.forEach((input, index) => {
       if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
         // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
         // ^ This might be based on ratio of income to expenditure...
+        // if (input.expenditureDetails) {
+        //   expect(resultantLTVAsString).toContain()
+        // }
         expect(resultantLTVAsInt).toBeGreaterThan(0);
         expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
       }
 
       // Check edge case where property value is less than or equal to 0.
       else if (input.mortgageDetails.propertyValue <= 0) {
-        // Error text is displayed when property value is less than or equal to 0.
         await expect(page.locator("#result-errors")).toBeVisible();
-
         await expect(page.locator("#lendingBasedOnProperty")).toContainText(
           "0"
         );

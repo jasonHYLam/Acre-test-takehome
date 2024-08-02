@@ -9,6 +9,20 @@ export const testData = [
     },
   },
 
+  // Input data for scenario where lending is given, with additional mortgage details provided.
+  {
+    mortgageDetails: {
+      propertyValue: 1000000,
+      jointMortgage: false,
+      maxLTV: 0.85,
+      mortgageTerm: 5,
+    },
+    incomeDetails: {
+      grossIncome: 100000,
+      foreignCurrency: false,
+    },
+  },
+
   // Input data for scenario where lending is not given, as expenditure is too great.
   {
     mortgageDetails: { propertyValue: 1000000 },
