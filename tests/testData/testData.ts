@@ -71,10 +71,22 @@ interface ProvidedDetails {
 }
 
 interface MortgageDetails {
-  propertyValue?: number;
+  purchaserType?: string;
   jointMortgage?: boolean;
   maxLTV?: MaxLTV;
+  applicant1Age?: number;
+  applicant2Age?: number;
+  applicant1EmploymentStatus?: string;
+  applicant2EmploymentStatus?: string;
+  martialStatus?: string;
+  dependantChildren?: number;
+  dependantAdults?: number;
+  depositAmount?: number;
+  loanAmount?: number;
+  propertyValue?: number;
   mortgageTerm?: number;
+  assessOnInterestOnlyBasis?: boolean;
+  propertyPostcode?: string;
 }
 
 interface IncomeDetails {
