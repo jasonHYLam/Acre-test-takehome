@@ -3,9 +3,11 @@ export const testData: ProvidedDetails[] = [
   // Input data for scenario where lending is given, as minimum details for lending are given.
   {
     mortgageDetails: { propertyValue: 1000000 },
-    incomeDetails: {
-      grossIncome: 100000,
-      foreignCurrency: false,
+    allIncomeDetails: {
+      applicant1IncomeDetails: {
+        grossIncome: 100000,
+        foreignCurrency: false,
+      },
     },
   },
 
@@ -90,8 +92,8 @@ interface MortgageDetails {
 }
 
 interface AllIncomeDetails {
-  applicant1IncomeDetails: IncomeDetails;
-  applicant2IncomeDetails: IncomeDetails;
+  applicant1IncomeDetails?: IncomeDetails;
+  applicant2IncomeDetails?: IncomeDetails;
 }
 
 interface IncomeDetails {
@@ -104,8 +106,8 @@ interface IncomeDetails {
 }
 
 interface AllExpenditureDetails {
-  applicant1ExpenditureDetails: ExpenditureDetails;
-  applicant2ExpenditureDetails: ExpenditureDetails;
+  applicant1ExpenditureDetails?: ExpenditureDetails;
+  applicant2ExpenditureDetails?: ExpenditureDetails;
 }
 
 interface ExpenditureDetails {
