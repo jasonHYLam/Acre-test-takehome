@@ -66,8 +66,8 @@ export const testData: ProvidedDetails[] = [
 
 interface ProvidedDetails {
   mortgageDetails?: MortgageDetails;
-  incomeDetails?: IncomeDetails;
-  expenditureDetails?: ExpenditureDetails;
+  allIncomeDetails?: AllIncomeDetails;
+  allExpenditureDetails?: AllExpenditureDetails;
 }
 
 interface MortgageDetails {
@@ -101,6 +101,11 @@ interface IncomeDetails {
   limitedCompanyNetProfits?: number;
   otherNonTaxableIncome?: number;
   existingBTLRentalIncome?: number;
+}
+
+interface AllExpenditureDetails {
+  applicant1ExpenditureDetails: ExpenditureDetails;
+  applicant2ExpenditureDetails: ExpenditureDetails;
 }
 
 interface ExpenditureDetails {
