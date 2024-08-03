@@ -13,6 +13,7 @@ import {
   checkValidIncomeDetailsForLending,
   checkValidMortgageDetailsForLending,
 } from "../helpers/utils";
+import { handleMortgageDetails } from "../helpers/handleMortgageDetails";
 
 // Table test which takes array of input and applies the same test to each.
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
@@ -23,18 +24,7 @@ testData.forEach((input, index) => {
   test(testTitle, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
     if (input.mortgageDetails) {
-      // TODO: Create module to handle mortgageDetails
-      await page.getByText("1 Mortgage Details").click();
-      if (
-        input.mortgageDetails.propertyValue ||
-        input.mortgageDetails.propertyValue === 0
-      ) {
-        await page.getByLabel("Property Value:").click();
-        await page
-          .getByLabel("Property Value:")
-          .fill(input.mortgageDetails.propertyValue.toString());
-        await page.getByLabel("Property Value:").press("Enter");
-      }
+      await handleMortgageDetails(page, input.mortgageDetails);
     }
 
     if (input.allIncomeDetails) {
