@@ -168,6 +168,10 @@ export async function handleMortgageDetails(
       await page.selectOption("assessOnInterestOnlyBasis", "0");
     }
   }
+
   if (propertyPostcode) {
+    const propertyPostcodeInput = page.getByLabel("Property Postcode");
+    await propertyPostcodeInput.click();
+    await propertyPostcodeInput.fill(propertyPostcode);
   }
 }
