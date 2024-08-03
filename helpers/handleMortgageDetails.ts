@@ -108,34 +108,37 @@ export async function handleMortgageDetails(
 
   if (maritalStatus) {
     if (maritalStatus === "Unknown") {
-      page.selectOption("a1maritalStatus", "U");
+      await page.selectOption("a1maritalStatus", "U");
     } else if (maritalStatus === "Single") {
-      page.selectOption("a1maritalStatus", "S");
+      await page.selectOption("a1maritalStatus", "S");
     } else if (maritalStatus === "Living Together") {
-      page.selectOption("a1maritalStatus", "L");
+      await page.selectOption("a1maritalStatus", "L");
     } else if (maritalStatus === "Married") {
-      page.selectOption("a1maritalStatus", "M");
+      await page.selectOption("a1maritalStatus", "M");
     } else if (maritalStatus === "Divorced") {
-      page.selectOption("a1maritalStatus", "D");
+      await page.selectOption("a1maritalStatus", "D");
     } else if (maritalStatus === "Widowed") {
-      page.selectOption("a1maritalStatus", "W");
+      await page.selectOption("a1maritalStatus", "W");
     } else if (maritalStatus === "Separated") {
-      page.selectOption("a1maritalStatus", "Z");
+      await page.selectOption("a1maritalStatus", "Z");
     }
   }
   if (dependantChildren) {
     if (dependantChildren >= 0 && dependantChildren <= 4) {
-      page.selectOption("noDependantChildren", dependantChildren.toString());
+      await page.selectOption(
+        "noDependantChildren",
+        dependantChildren.toString()
+      );
     } else if (dependantChildren >= 5) {
-      page.selectOption("noDependantChildren", "5+");
+      await page.selectOption("noDependantChildren", "5+");
     }
   }
 
   if (dependantAdults) {
     if (dependantAdults >= 0 && dependantAdults <= 4) {
-      page.selectOption("noDependantAdults", dependantAdults.toString());
+      await page.selectOption("noDependantAdults", dependantAdults.toString());
     } else if (dependantAdults >= 5) {
-      page.selectOption("noDependantAdults", "5+");
+      await page.selectOption("noDependantAdults", "5+");
     }
   }
 
