@@ -5,6 +5,7 @@ export async function handleIncomeDetails(
   page: Page,
   allIncomeDetails: AllIncomeDetails
 ) {
+  await page.getByText("2 Income").click();
   const { applicant1IncomeDetails, applicant2IncomeDetails } = allIncomeDetails;
   if (applicant1IncomeDetails) {
     if (

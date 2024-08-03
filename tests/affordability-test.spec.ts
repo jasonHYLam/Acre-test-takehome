@@ -14,6 +14,7 @@ import {
   checkValidMortgageDetailsForLending,
 } from "../helpers/utils";
 import { handleMortgageDetails } from "../helpers/handleMortgageDetails";
+import { handleIncomeDetails } from "../helpers/handleIncomeDetails";
 
 // Table test which takes array of input and applies the same test to each.
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
@@ -28,36 +29,7 @@ testData.forEach((input, index) => {
     }
 
     if (input.allIncomeDetails) {
-      // TODO: Create module to handle incomeDetails
-      await page.getByText("2 Income").click();
-      const { applicant1IncomeDetails, applicant2IncomeDetails } =
-        input.allIncomeDetails;
-      if (applicant1IncomeDetails) {
-        if (
-          applicant1IncomeDetails.grossIncome ||
-          applicant1IncomeDetails.grossIncome === 0
-        ) {
-          await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
-          await page
-            .getByRole("spinbutton", { name: "Gross Income:" })
-            .fill("100000");
-          await page
-            .getByRole("spinbutton", { name: "Gross Income:" })
-            .press("Enter");
-        }
-
-        if (
-          applicant1IncomeDetails.foreignCurrency ||
-          applicant1IncomeDetails.foreignCurrency === false
-        ) {
-          await page.getByRole("button", { name: "Nothing selected" }).click();
-          await page
-            .getByRole("menu")
-            .locator("a")
-            .filter({ hasText: "No" })
-            .click();
-        }
-      }
+      await handleIncomeDetails(page, input.allIncomeDetails);
     }
 
     if (input.allExpenditureDetails) {
