@@ -161,7 +161,12 @@ export async function handleMortgageDetails(
       await page.selectOption("requiredMortgageTerm", mortgageTerm.toString());
     }
   }
-  if (assessOnInterestOnlyBasis) {
+  if (assessOnInterestOnlyBasis || assessOnInterestOnlyBasis === false) {
+    if (assessOnInterestOnlyBasis) {
+      await page.selectOption("assessOnInterestOnlyBasis", "1");
+    } else {
+      await page.selectOption("assessOnInterestOnlyBasis", "0");
+    }
   }
   if (propertyPostcode) {
   }
