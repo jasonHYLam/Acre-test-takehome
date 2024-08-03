@@ -28,16 +28,27 @@ export async function handleMortgageDetails(
   } = mortgageDetails;
 
   if (purchaserType) {
+    await page.getByRole("button", { name: "Buying first house" }).click();
+    // TODO:
   }
   if (jointMortgage) {
+    await page.getByRole("button", { name: "Sole" }).click();
+    // TODO:
   }
   if (maxLTV) {
+    await page
+      .getByRole("button", { name: "Less than or equal 85% (LTI 4" })
+      .click();
+
+    // TODO:
   }
   if (applicant1Age) {
+    await page.getByRole("button", { name: "18" }).first().click();
   }
   if (applicant2Age) {
   }
   if (applicant1EmploymentStatus) {
+    await page.getByRole("button", { name: "Unknown" }).first().click();
   }
   if (applicant2EmploymentStatus) {
   }

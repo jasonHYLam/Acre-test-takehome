@@ -5,13 +5,13 @@ export interface ProvidedDetails {
 }
 
 export interface MortgageDetails {
-  purchaserType?: string;
+  purchaserType?: PurchaserType;
   jointMortgage?: boolean;
   maxLTV?: MaxLTV;
   applicant1Age?: number;
   applicant2Age?: number;
-  applicant1EmploymentStatus?: string;
-  applicant2EmploymentStatus?: string;
+  applicant1EmploymentStatus?: EmploymentStatus;
+  applicant2EmploymentStatus?: EmploymentStatus;
   maritalStatus?: string;
   dependantChildren?: number;
   dependantAdults?: number;
@@ -22,6 +22,21 @@ export interface MortgageDetails {
   assessOnInterestOnlyBasis?: boolean;
   propertyPostcode?: string;
 }
+
+type PurchaserType =
+  | "Buying first house"
+  | "Buying first house - moving"
+  | "Moving to HSBC";
+
+type EmploymentStatus =
+  | "Unknown"
+  | "Employed"
+  | "Self-employed"
+  | "Homemaker"
+  | "Receiving Pension"
+  | "Student"
+  | "Key/Part Time"
+  | "Unemployed";
 
 export interface AllIncomeDetails {
   applicant1IncomeDetails?: IncomeDetails;
