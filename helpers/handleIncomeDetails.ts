@@ -34,12 +34,27 @@ async function handleIncomeDetailsForOneApplicant(
     await clickAndEnterNumericalInput(grossIncomeInput, grossIncome);
   }
 
-  // TODO: Modify this to handle the other cases; currently only handles No; may require switch statement
-  //  await page.getByRole('button', { name: 'Nothing selected' }).click();
-  //  await page.getByRole('menu').locator('a').filter({ hasText: 'Yes - 30% Haircut to be' }).click();
   if (foreignCurrency || foreignCurrency === false) {
     await page.getByRole("button", { name: "Nothing selected" }).click();
-    await page.getByRole("menu").locator("a").filter({ hasText: "No" }).click();
+    if (foreignCurrency === false) {
+      await page
+        .getByRole("menu")
+        .locator("a")
+        .filter({ hasText: "No" })
+        .click();
+    } else if (foreignCurrency === 0.1) {
+      await page
+        .getByRole("button", { name: "Yes - 10% Haircut to be" })
+        .click();
+    } else if (foreignCurrency === 0.2) {
+      await page
+        .getByRole("button", { name: "Yes - 20% Haircut to be" })
+        .click();
+    } else {
+      await page
+        .getByRole("button", { name: "Yes - 30% Haircut to be" })
+        .click();
+    }
   }
 
   if (additionalIncome || additionalIncome === 0) {
@@ -58,6 +73,7 @@ async function handleIncomeDetailsForOneApplicant(
       limitedCompanyNetProfits
     );
   }
+
   if (otherNonTaxableIncome || otherNonTaxableIncome === 0) {
     const otherNonTaxableIncomeInput = page.locator(
       `#a${applicantNumber}otherNonTaxableIncome`
