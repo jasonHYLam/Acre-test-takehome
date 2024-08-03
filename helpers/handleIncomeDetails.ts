@@ -1,5 +1,6 @@
 import { Page } from "@playwright/test";
 import { AllIncomeDetails } from "./types";
+import { clickAndEnterNumericalInput } from "./utils";
 
 export async function handleIncomeDetails(
   page: Page,
@@ -17,13 +18,10 @@ export async function handleIncomeDetails(
       existingBTLRentalIncome,
     } = applicant1IncomeDetails;
     if (grossIncome || grossIncome === 0) {
-      await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
-      await page
-        .getByRole("spinbutton", { name: "Gross Income:" })
-        .fill(grossIncome.toString());
-      await page
-        .getByRole("spinbutton", { name: "Gross Income:" })
-        .press("Enter");
+      const grossIncomeInput = page.getByRole("spinbutton", {
+        name: "Gross Income:",
+      });
+      await clickAndEnterNumericalInput(grossIncomeInput, grossIncome);
     }
 
     if (foreignCurrency || foreignCurrency === false) {
@@ -35,5 +33,11 @@ export async function handleIncomeDetails(
         .filter({ hasText: "No" })
         .click();
     }
+    //  await page.getByRole('spinbutton', { name: 'Gross Income:' }).click();
+    //  await page.getByRole('spinbutton', { name: 'Additional Income:' }).click();
+    //  await page.getByRole('spinbutton', { name: 'Limited Company Net profits:' }).click();
+    //  await page.getByRole('spinbutton', { name: 'Other Non Taxable Income:' }).click();
+    //  await page.getByRole('button', { name: 'Nothing selected' }).click();
+    //  await page.getByRole('menu').locator('a').filter({ hasText: 'Yes - 30% Haircut to be' }).click();
   }
 }
