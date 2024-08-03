@@ -1,3 +1,4 @@
+import { Locator } from "@playwright/test";
 import { ProvidedDetails, AllIncomeDetails } from "./types";
 
 // Checks if valid mortgage details (property value) is present.
@@ -93,3 +94,13 @@ export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
 }
 
 // TODO: Calculate total expenditure
+
+// Handles clicking on an numerical input, filling in the value, and pressing enter.
+export async function clickAndEnterNumericalInput(
+  locator: Locator,
+  value: number
+) {
+  await locator.click();
+  await locator.fill(value.toString());
+  await locator.press("Enter");
+}

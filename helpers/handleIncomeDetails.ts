@@ -8,27 +8,30 @@ export async function handleIncomeDetails(
   await page.getByText("2 Income").click();
   const { applicant1IncomeDetails, applicant2IncomeDetails } = allIncomeDetails;
   if (applicant1IncomeDetails) {
-    if (
-      applicant1IncomeDetails.grossIncome ||
-      applicant1IncomeDetails.grossIncome === 0
-    ) {
+    const {
+      grossIncome,
+      foreignCurrency,
+      additionalIncome,
+      limitedCompanyNetProfits,
+      otherNonTaxableIncome,
+      existingBTLRentalIncome,
+    } = applicant1IncomeDetails;
+    if (grossIncome || grossIncome === 0) {
       await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
       await page
         .getByRole("spinbutton", { name: "Gross Income:" })
-        .fill(applicant1IncomeDetails.grossIncome?.toString());
+        .fill(grossIncome.toString());
       await page
         .getByRole("spinbutton", { name: "Gross Income:" })
         .press("Enter");
     }
 
-    if (
-      applicant1IncomeDetails.foreignCurrency ||
-      applicant1IncomeDetails.foreignCurrency === false
-    ) {
+    if (foreignCurrency || foreignCurrency === false) {
       await page.getByRole("button", { name: "Nothing selected" }).click();
       await page
         .getByRole("menu")
         .locator("a")
+        // TODO: Modify this to handle the other cases
         .filter({ hasText: "No" })
         .click();
     }
