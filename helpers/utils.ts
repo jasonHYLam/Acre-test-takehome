@@ -1,12 +1,11 @@
 import { ProvidedDetails, AllIncomeDetails } from "./types";
 
 // Checks if valid mortgage details (property value) is present.
-// TODO: Add propertyValue check (where did it go)
 export function checkValidMortgageDetailsForLending(
   providedDetails: ProvidedDetails
 ) {
-  if (providedDetails.mortgageDetails) {
-    return providedDetails.mortgageDetails !== null;
+  if (providedDetails.mortgageDetails?.propertyValue) {
+    return providedDetails.mortgageDetails.propertyValue;
   }
   return false;
 }
