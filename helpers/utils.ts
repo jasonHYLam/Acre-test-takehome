@@ -1,5 +1,5 @@
 import { Locator } from "@playwright/test";
-import { ProvidedDetails, AllIncomeDetails } from "./types";
+import { ProvidedDetails, AllIncomeDetails, IncomeDetails } from "./types";
 
 // Checks if valid mortgage details (property value) is present.
 export function checkValidMortgageDetailsForLending(
@@ -72,25 +72,27 @@ export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
 
   if (allIncomeDetails.applicant1IncomeDetails) {
     const incomeDetails = allIncomeDetails.applicant1IncomeDetails;
-    totalIncome +
-      (incomeDetails.grossIncome ?? 0) +
-      (incomeDetails.additionalIncome ?? 0) +
-      (incomeDetails.limitedCompanyNetProfits ?? 0) +
-      (incomeDetails.otherNonTaxableIncome ?? 0) +
-      (incomeDetails.existingBTLRentalIncome ?? 0);
+    totalIncome + calculateIncomeForApplicant(incomeDetails);
   }
 
   if (allIncomeDetails.applicant2IncomeDetails) {
     const incomeDetails = allIncomeDetails.applicant2IncomeDetails;
-    totalIncome +
-      (incomeDetails.grossIncome ?? 0) +
-      (incomeDetails.additionalIncome ?? 0) +
-      (incomeDetails.limitedCompanyNetProfits ?? 0) +
-      (incomeDetails.otherNonTaxableIncome ?? 0) +
-      (incomeDetails.existingBTLRentalIncome ?? 0);
+    totalIncome + calculateIncomeForApplicant(incomeDetails);
   }
 
   return totalIncome;
+}
+
+function calculateIncomeForApplicant(incomeDetails: IncomeDetails) {
+  let totalIncomeForApplicant = 0;
+  totalIncomeForApplicant +
+    (incomeDetails.grossIncome ?? 0) +
+    (incomeDetails.additionalIncome ?? 0) +
+    (incomeDetails.limitedCompanyNetProfits ?? 0) +
+    (incomeDetails.otherNonTaxableIncome ?? 0) +
+    (incomeDetails.existingBTLRentalIncome ?? 0);
+
+  return totalIncomeForApplicant;
 }
 
 // TODO: Calculate total expenditure
