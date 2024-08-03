@@ -1,12 +1,11 @@
+// @ts-check
+
 import { expect, Page } from "@playwright/test";
-
 import { ProvidedDetails } from "./types";
-
 import {
   MIN_PROPERTY_VALUE,
   MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING,
 } from "./constants";
-
 import {
   checkValidMortgageDetailsForLending,
   checkValidIncomeDetailsForLending,

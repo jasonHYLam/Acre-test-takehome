@@ -59,5 +59,30 @@ function checkValidIncomeDetailsForLendingForJointMortgage(
 }
 
 // TODO: Calculate total income
+export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
+  let totalIncome = 0;
+
+  if (allIncomeDetails.applicant1IncomeDetails) {
+    const incomeDetails = allIncomeDetails.applicant1IncomeDetails;
+    totalIncome +
+      (incomeDetails.grossIncome ?? 0) +
+      (incomeDetails.additionalIncome ?? 0) +
+      (incomeDetails.limitedCompanyNetProfits ?? 0) +
+      (incomeDetails.otherNonTaxableIncome ?? 0) +
+      (incomeDetails.existingBTLRentalIncome ?? 0);
+  }
+
+  if (allIncomeDetails.applicant2IncomeDetails) {
+    const incomeDetails = allIncomeDetails.applicant2IncomeDetails;
+    totalIncome +
+      (incomeDetails.grossIncome ?? 0) +
+      (incomeDetails.additionalIncome ?? 0) +
+      (incomeDetails.limitedCompanyNetProfits ?? 0) +
+      (incomeDetails.otherNonTaxableIncome ?? 0) +
+      (incomeDetails.existingBTLRentalIncome ?? 0);
+  }
+
+  return totalIncome;
+}
 
 // TODO: Calculate total expenditure

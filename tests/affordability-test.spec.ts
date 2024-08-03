@@ -13,7 +13,6 @@ import { checkResults } from "../helpers/checkResults";
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 testData.forEach((input, index) => {
   // TODO: Add descriptive names to input data
-  // TODO: Split up sections into separate modules
   const testTitle = `Test ${index + 1}`;
   test(testTitle, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
