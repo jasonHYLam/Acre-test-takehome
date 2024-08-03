@@ -1,5 +1,10 @@
 import { Locator } from "@playwright/test";
-import { ProvidedDetails, AllIncomeDetails, IncomeDetails } from "./types";
+import {
+  ProvidedDetails,
+  AllIncomeDetails,
+  IncomeDetails,
+  ExpenditureDetails,
+} from "./types";
 
 // Checks if valid mortgage details (property value) is present.
 export function checkValidMortgageDetailsForLending(
@@ -37,7 +42,6 @@ export function checkValidIncomeDetailsForLending(
   return false;
 }
 
-// TODO: Add check for foreignCurrency
 function checkValidIncomeDetailsForLendingForSoleMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
@@ -50,7 +54,6 @@ function checkValidIncomeDetailsForLendingForSoleMortgage(
   );
 }
 
-// TODO: Add check for foreignCurrency
 function checkValidIncomeDetailsForLendingForJointMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
@@ -96,6 +99,21 @@ function calculateIncomeForApplicant(incomeDetails: IncomeDetails) {
 }
 
 // TODO: Calculate total expenditure
+function calculateExpenditureForApplicant(
+  expenditureDetails: ExpenditureDetails
+) {
+  let totalExpenditureForApplicant = 0;
+  totalExpenditureForApplicant +
+    (expenditureDetails.monthlyBTLOutgoings ?? 0) +
+    (expenditureDetails.monthlyLoanPayments ?? 0) +
+    (expenditureDetails.creditCards ?? 0) +
+    (expenditureDetails.groundRent ?? 0) +
+    (expenditureDetails.travel ?? 0) +
+    (expenditureDetails.childCareCosts ?? 0) +
+    (expenditureDetails.otherExpenditure ?? 0);
+
+  return totalExpenditureForApplicant;
+}
 
 // Handles clicking on an numerical input, filling in the value, and pressing enter.
 export async function clickAndEnterNumericalInput(
