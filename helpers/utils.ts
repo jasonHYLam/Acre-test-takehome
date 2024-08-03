@@ -45,7 +45,7 @@ function checkValidIncomeDetailsForLendingForSoleMortgage(
   return (
     applicant1IncomeDetails &&
     applicant1IncomeDetails.grossIncome !== null &&
-    applicant1IncomeDetails !== null
+    applicant1IncomeDetails.foreignCurrency !== null
   );
 }
 
@@ -58,10 +58,10 @@ function checkValidIncomeDetailsForLendingForJointMortgage(
   return (
     applicant1IncomeDetails &&
     applicant1IncomeDetails.grossIncome !== null &&
-    applicant1IncomeDetails !== null &&
+    applicant1IncomeDetails.foreignCurrency !== null &&
     applicant2IncomeDetails &&
     applicant2IncomeDetails.grossIncome !== null &&
-    applicant2IncomeDetails !== null
+    applicant2IncomeDetails.foreignCurrency !== null
   );
 }
 
