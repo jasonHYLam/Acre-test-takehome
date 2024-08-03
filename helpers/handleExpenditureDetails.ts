@@ -12,14 +12,14 @@ export async function handleExpenditureDetails(
     allExpenditureDetails;
 
   if (applicant1ExpenditureDetails) {
-    handleExpenditureDetailsForOneApplicant(
+    await handleExpenditureDetailsForOneApplicant(
       page,
       applicant1ExpenditureDetails,
       1
     );
   }
   if (applicant2ExpenditureDetails) {
-    handleExpenditureDetailsForOneApplicant(
+    await handleExpenditureDetailsForOneApplicant(
       page,
       applicant2ExpenditureDetails,
       2
