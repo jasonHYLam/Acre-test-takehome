@@ -16,7 +16,7 @@ export async function handleMortgageDetails(
     applicant2Age,
     applicant1EmploymentStatus,
     applicant2EmploymentStatus,
-    martialStatus,
+    maritalStatus,
     dependantChildren,
     dependantAdults,
     depositAmount,
@@ -41,7 +41,7 @@ export async function handleMortgageDetails(
   }
   if (applicant2EmploymentStatus) {
   }
-  if (martialStatus) {
+  if (maritalStatus) {
   }
   if (dependantChildren) {
   }

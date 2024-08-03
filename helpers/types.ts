@@ -12,7 +12,7 @@ export interface MortgageDetails {
   applicant2Age?: number;
   applicant1EmploymentStatus?: string;
   applicant2EmploymentStatus?: string;
-  martialStatus?: string;
+  maritalStatus?: string;
   dependantChildren?: number;
   dependantAdults?: number;
   depositAmount?: number;
