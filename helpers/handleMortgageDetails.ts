@@ -38,107 +38,107 @@ export async function handleMortgageDetails(
   }
   if (jointMortgage || jointMortgage === false) {
     if (jointMortgage) {
-      await page.selectOption("isJointMortgage", "1");
-    } else {
-      await page.selectOption("isJointMortgage", "0");
+      await page.selectOption("#isJointMortgage", "1");
+    } else if (jointMortgage === false) {
+      await page.selectOption("#isJointMortgage", "0");
     }
   }
 
   if (maxLTV) {
     if (maxLTV === 0.85) {
-      await page.selectOption("maximumLTV", "85");
+      await page.selectOption("#maximumLTV", "85");
     } else if (maxLTV === 0.9) {
-      await page.selectOption("maximumLTV", "90");
+      await page.selectOption("#maximumLTV", "90");
     } else {
-      await page.selectOption("maximumLTV", "95");
+      await page.selectOption("#maximumLTV", "95");
     }
   }
 
   if (applicant1Age) {
     if (applicant1Age >= 18 || applicant1Age <= 99) {
-      await page.selectOption("a1applicantsAge", applicant1Age.toString());
+      await page.selectOption("#a1applicantsAge", applicant1Age.toString());
     }
   }
 
   if (applicant2Age) {
     if (applicant2Age >= 18 && applicant2Age <= 99) {
-      await page.selectOption("a2applicantsAge", applicant2Age.toString());
+      await page.selectOption("#a2applicantsAge", applicant2Age.toString());
     }
   }
 
   if (applicant1EmploymentStatus) {
     if (applicant1EmploymentStatus === "Unknown") {
-      await page.selectOption("a1employmentStatus", "X");
+      await page.selectOption("#a1employmentStatus", "X");
     } else if (applicant1EmploymentStatus === "Employed") {
-      await page.selectOption("a1employmentStatus", "E");
+      await page.selectOption("#a1employmentStatus", "E");
     } else if (applicant1EmploymentStatus === "Self-employed") {
-      await page.selectOption("a1employmentStatus", "S");
+      await page.selectOption("#a1employmentStatus", "S");
     } else if (applicant1EmploymentStatus === "Homemaker") {
-      await page.selectOption("a1employmentStatus", "H");
+      await page.selectOption("#a1employmentStatus", "H");
     } else if (applicant1EmploymentStatus === "Receiving Pension") {
-      await page.selectOption("a1employmentStatus", "P");
+      await page.selectOption("#a1employmentStatus", "P");
     } else if (applicant1EmploymentStatus === "Student") {
-      await page.selectOption("a1employmentStatus", "G");
+      await page.selectOption("#a1employmentStatus", "G");
     } else if (applicant1EmploymentStatus === "Key/Part Time") {
-      await page.selectOption("a1employmentStatus", "K");
+      await page.selectOption("#a1employmentStatus", "K");
     } else if (applicant1EmploymentStatus === "Unemployed") {
-      await page.selectOption("a1employmentStatus", "U");
+      await page.selectOption("#a1employmentStatus", "U");
     }
   }
 
   if (applicant2EmploymentStatus) {
     if (applicant2EmploymentStatus === "Unknown") {
-      await page.selectOption("a2employmentStatus", "X");
+      await page.selectOption("#a2employmentStatus", "X");
     } else if (applicant2EmploymentStatus === "Employed") {
-      await page.selectOption("a2employmentStatus", "E");
+      await page.selectOption("#a2employmentStatus", "E");
     } else if (applicant2EmploymentStatus === "Self-employed") {
-      await page.selectOption("a2employmentStatus", "S");
+      await page.selectOption("#a2employmentStatus", "S");
     } else if (applicant2EmploymentStatus === "Homemaker") {
-      await page.selectOption("a2employmentStatus", "H");
+      await page.selectOption("#a2employmentStatus", "H");
     } else if (applicant2EmploymentStatus === "Receiving Pension") {
-      await page.selectOption("a2employmentStatus", "P");
+      await page.selectOption("#a2employmentStatus", "P");
     } else if (applicant2EmploymentStatus === "Student") {
-      await page.selectOption("a2employmentStatus", "G");
+      await page.selectOption("#a2employmentStatus", "G");
     } else if (applicant2EmploymentStatus === "Key/Part Time") {
-      await page.selectOption("a2employmentStatus", "K");
+      await page.selectOption("#a2employmentStatus", "K");
     } else if (applicant2EmploymentStatus === "Unemployed") {
-      await page.selectOption("a2employmentStatus", "U");
+      await page.selectOption("#a2employmentStatus", "U");
     }
   }
 
   if (maritalStatus) {
     if (maritalStatus === "Unknown") {
-      await page.selectOption("a1maritalStatus", "U");
+      await page.selectOption("#a1maritalStatus", "U");
     } else if (maritalStatus === "Single") {
-      await page.selectOption("a1maritalStatus", "S");
+      await page.selectOption("#a1maritalStatus", "S");
     } else if (maritalStatus === "Living Together") {
-      await page.selectOption("a1maritalStatus", "L");
+      await page.selectOption("#a1maritalStatus", "L");
     } else if (maritalStatus === "Married") {
-      await page.selectOption("a1maritalStatus", "M");
+      await page.selectOption("#a1maritalStatus", "M");
     } else if (maritalStatus === "Divorced") {
-      await page.selectOption("a1maritalStatus", "D");
+      await page.selectOption("#a1maritalStatus", "D");
     } else if (maritalStatus === "Widowed") {
-      await page.selectOption("a1maritalStatus", "W");
+      await page.selectOption("#a1maritalStatus", "W");
     } else if (maritalStatus === "Separated") {
-      await page.selectOption("a1maritalStatus", "Z");
+      await page.selectOption("#a1maritalStatus", "Z");
     }
   }
   if (dependantChildren) {
     if (dependantChildren >= 0 && dependantChildren <= 4) {
       await page.selectOption(
-        "noDependantChildren",
+        "#noDependantChildren",
         dependantChildren.toString()
       );
     } else if (dependantChildren >= 5) {
-      await page.selectOption("noDependantChildren", "5+");
+      await page.selectOption("#noDependantChildren", "5+");
     }
   }
 
   if (dependantAdults) {
     if (dependantAdults >= 0 && dependantAdults <= 4) {
-      await page.selectOption("noDependantAdults", dependantAdults.toString());
+      await page.selectOption("#noDependantAdults", dependantAdults.toString());
     } else if (dependantAdults >= 5) {
-      await page.selectOption("noDependantAdults", "5+");
+      await page.selectOption("#noDependantAdults", "5+");
     }
   }
 
@@ -158,14 +158,14 @@ export async function handleMortgageDetails(
 
   if (mortgageTerm) {
     if (mortgageTerm >= 5 && mortgageTerm <= 40) {
-      await page.selectOption("requiredMortgageTerm", mortgageTerm.toString());
+      await page.selectOption("#requiredMortgageTerm", mortgageTerm.toString());
     }
   }
   if (assessOnInterestOnlyBasis || assessOnInterestOnlyBasis === false) {
     if (assessOnInterestOnlyBasis) {
-      await page.selectOption("assessOnInterestOnlyBasis", "1");
+      await page.selectOption("#assessOnInterestOnlyBasis", "1");
     } else {
-      await page.selectOption("assessOnInterestOnlyBasis", "0");
+      await page.selectOption("#assessOnInterestOnlyBasis", "0");
     }
   }
 
