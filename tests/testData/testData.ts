@@ -43,7 +43,7 @@ export const testData: ProvidedDetails[] = [
   {
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {
-      applicant1IncomeDetails: { grossIncome: 100000 },
+      applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
     },
     allExpenditureDetails: {
       applicant1ExpenditureDetails: { monthlyBTLOutgoings: 3700 },

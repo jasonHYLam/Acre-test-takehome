@@ -18,7 +18,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
 
   const resultErrorsLocator = page.locator("#result-errors");
   const lendingBasedOnPropertyLocator = page.locator("#lendingBasedOnProperty");
-  const resultantLTVLocator = page.locator("#resultantLTVLocator");
+  const resultantLTVLocator = page.locator("#resultantLTV");
   const lendingBasedOnAffordabilityLocator = page.locator(
     "#lendingBasedOnAffordability"
   );
@@ -26,6 +26,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
   const validMortgageDetailsForLending =
     checkValidMortgageDetailsForLending(input);
 
+  // This seems to miss test 5 where foreignCurrency is not given
   const validIncomeDetailsForLending = checkValidIncomeDetailsForLending(input);
 
   // Checks scenarios where minimum criteria for lending are met.
@@ -38,47 +39,45 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
       await lendingBasedOnPropertyLocator.textContent();
     const lendingBasedOnPropertyAsInt = Number(lendingBasedOnPropertyAsString);
 
-    await expect(resultantLTVLocator).toBeVisible();
+    expect(resultantLTVLocator).toBeVisible();
     const resultantLTVAsString = await resultantLTVLocator.textContent();
     const resultantLTVAsInt = Number(resultantLTVAsString);
 
     // Checks that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
     if (input.mortgageDetails?.propertyValue) {
-      if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
-        // Case where income is too low compared to property value.
-        // TODO: Change to total income rather than gross income.
-        // There is a strange relationship; gross income seems to hold more weight compared to the other income inputs. So the above TODO may not be relevant
-
+      const { propertyValue } = input.mortgageDetails;
+      if (propertyValue >= MIN_PROPERTY_VALUE) {
         // Cases when (some) income details are provided.
         if (input.allIncomeDetails) {
           const totalIncome = calculateTotalIncome(input.allIncomeDetails);
 
+          // Cases when gross income is existent.
           if (input.allIncomeDetails.applicant1IncomeDetails?.grossIncome) {
             const { grossIncome } =
               input.allIncomeDetails.applicant1IncomeDetails;
-          }
-        }
 
-        // Cases when gross income is existent.
-        if (input.allIncomeDetails?.applicant1IncomeDetails?.grossIncome) {
-          const { grossIncome } =
-            input.allIncomeDetails.applicant1IncomeDetails;
+            // Case where income is too low compared to property value for lending.
+            // TODO: Change to total income rather than gross income.
+            // There is a strange relationship; gross income seems to hold more weight compared to the other income inputs. So the above TODO may not be relevant
+            if (
+              grossIncome / propertyValue <
+              MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING
+            ) {
+              expect(resultantLTVAsInt).toBe(0);
+            }
+            // Case where income is great enough compared to property value to allow lending.
+            else {
+              expect(resultantLTVAsInt).toBeGreaterThan(0);
+              expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
+            }
 
-          // Case when the gross income to property ratio is less than the minimum required for lending.
-          if (
-            grossIncome / input.mortgageDetails.propertyValue <
-            MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING
-          ) {
-            expect(resultantLTVAsInt).toBe(0);
+            // Not sure where this TODO should go...
+            // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
+            // ^ This might be based on ratio of income to expenditure...
+            // if (input.expenditureDetails) {
+            //   expect(resultantLTVAsString).toContain()
+            // }
           }
-          // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
-          // ^ This might be based on ratio of income to expenditure...
-          // if (input.expenditureDetails) {
-          //   expect(resultantLTVAsString).toContain()
-          // }
-        } else {
-          expect(resultantLTVAsInt).toBeGreaterThan(0);
-          expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
         }
       }
 
