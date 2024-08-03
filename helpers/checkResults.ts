@@ -9,17 +9,26 @@ import {
 import {
   checkValidMortgageDetailsForLending,
   checkValidIncomeDetailsForLending,
+  calculateTotalExpenditure,
+  calculateTotalIncome,
 } from "./utils";
 
 export async function checkResults(page: Page, input: ProvidedDetails) {
   await page.getByText("view", { exact: true }).click();
+
+  const resultErrorsLocator = page.locator("#result-errors");
+  const lendingBasedOnPropertyLocator = page.locator("#lendingBasedOnProperty");
+  const resultantLTVLocator = page.locator("#resultantLTVLocator");
+  const lendingBasedOnAffordabilityLocator = page.locator(
+    "#lendingBasedOnAffordability"
+  );
 
   const validMortgageDetailsForLending =
     checkValidMortgageDetailsForLending(input);
 
   const validIncomeDetailsForLending = checkValidIncomeDetailsForLending(input);
 
-  // Check scenarios where minimum criteria for lending are met.
+  // Checks scenarios where minimum criteria for lending are met.
   if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
     await expect(page.locator("#result-errors")).toBeHidden();
     await expect(page.locator("#lendingBasedOnProperty")).toBeVisible();
@@ -36,12 +45,17 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
       .textContent();
     const resultantLTVAsInt = Number(resultantLTVAsString);
 
-    // Check that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
+    // Checks that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
     if (input.mortgageDetails?.propertyValue) {
       if (input.mortgageDetails.propertyValue >= MIN_PROPERTY_VALUE) {
         // Case where income is too low compared to property value.
         // TODO: Change to total income rather than gross income.
-        // ^ May require function to calculate at the start.
+        // There is a strange relationship; gross income seems to hold more weight compared to the other income inputs. So the above TODO may not be relevant
+
+        if (input.allIncomeDetails) {
+          const totalIncome = calculateTotalIncome(input.allIncomeDetails);
+        }
+
         if (input.allIncomeDetails?.applicant1IncomeDetails?.grossIncome) {
           const { grossIncome } =
             input.allIncomeDetails.applicant1IncomeDetails;
@@ -62,7 +76,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
         }
       }
 
-      // Check edge case where property value is less than or equal to 0.
+      // Checks edge cases where property value is less than or equal to 0.
       else if (input.mortgageDetails.propertyValue <= 0) {
         await expect(page.locator("#result-errors")).toBeVisible();
         await expect(page.locator("#lendingBasedOnProperty")).toContainText(
@@ -74,7 +88,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
         ).toContainText("NOT AVAILABLE");
       }
 
-      // Check all other cases where property value is between 0 and minimum value for lending.
+      // Checks all other cases where property value is between 0 and minimum value for lending.
       else {
         await expect(page.locator("#lendingBasedOnProperty")).toContainText(
           "NOT AVAILABLE"
@@ -87,7 +101,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
     }
   }
 
-  // Check scenarios where minimum criteria for lending are NOT met.
+  // Checks scenarios where minimum criteria for lending are NOT met.
   else {
     // If valid details are not provided, expect errors to be displayed.
     await expect(page.locator("#result-errors")).toBeVisible();
