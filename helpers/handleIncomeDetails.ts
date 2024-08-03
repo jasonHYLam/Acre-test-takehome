@@ -24,20 +24,55 @@ export async function handleIncomeDetails(
       await clickAndEnterNumericalInput(grossIncomeInput, grossIncome);
     }
 
+    // TODO: Modify this to handle the other cases; currently only handles No; may require switch statement
+    //  await page.getByRole('button', { name: 'Nothing selected' }).click();
+    //  await page.getByRole('menu').locator('a').filter({ hasText: 'Yes - 30% Haircut to be' }).click();
     if (foreignCurrency || foreignCurrency === false) {
       await page.getByRole("button", { name: "Nothing selected" }).click();
       await page
         .getByRole("menu")
         .locator("a")
-        // TODO: Modify this to handle the other cases
         .filter({ hasText: "No" })
         .click();
     }
-    //  await page.getByRole('spinbutton', { name: 'Gross Income:' }).click();
-    //  await page.getByRole('spinbutton', { name: 'Additional Income:' }).click();
-    //  await page.getByRole('spinbutton', { name: 'Limited Company Net profits:' }).click();
-    //  await page.getByRole('spinbutton', { name: 'Other Non Taxable Income:' }).click();
-    //  await page.getByRole('button', { name: 'Nothing selected' }).click();
-    //  await page.getByRole('menu').locator('a').filter({ hasText: 'Yes - 30% Haircut to be' }).click();
+
+    if (additionalIncome || additionalIncome === 0) {
+      const additionalIncomeInput = page.getByRole("spinbutton", {
+        name: "Additional Income:",
+      });
+      await clickAndEnterNumericalInput(
+        additionalIncomeInput,
+        additionalIncome
+      );
+    }
+
+    if (limitedCompanyNetProfits || limitedCompanyNetProfits === 0) {
+      const limitedCompanyNetProfitsInput = page.getByRole("spinbutton", {
+        name: "Limited Company Net profits:",
+      });
+      await clickAndEnterNumericalInput(
+        limitedCompanyNetProfitsInput,
+        limitedCompanyNetProfits
+      );
+    }
+    if (otherNonTaxableIncome || otherNonTaxableIncome === 0) {
+      const otherNonTaxableIncomeInput = page.getByRole("spinbutton", {
+        name: "Other Non Taxable Income:",
+      });
+      await clickAndEnterNumericalInput(
+        otherNonTaxableIncomeInput,
+        otherNonTaxableIncome
+      );
+    }
+
+    if (existingBTLRentalIncome || existingBTLRentalIncome === 0) {
+      const existingBTLRentalIncomeInput = page.getByRole("spinbutton", {
+        name: "Existing BTL Rental Income:",
+      });
+      await clickAndEnterNumericalInput(
+        existingBTLRentalIncomeInput,
+        existingBTLRentalIncome
+      );
+    }
   }
 }
