@@ -12,20 +12,18 @@ export async function handleExpenditureDetails(
     allExpenditureDetails;
 
   if (applicant1ExpenditureDetails) {
-    if (
-      applicant1ExpenditureDetails.monthlyBTLOutgoings ||
-      applicant1ExpenditureDetails.monthlyBTLOutgoings === 0
-    ) {
-      await page
-        .getByRole("spinbutton", { name: "Existing Monthly BTL" })
-        .click();
-      await page
-        .getByRole("spinbutton", { name: "Existing Monthly BTL" })
-        .fill(applicant1ExpenditureDetails.monthlyBTLOutgoings.toString());
-      await page
-        .getByRole("spinbutton", { name: "Existing Monthly BTL" })
-        .press("Enter");
-    }
+    handleExpenditureDetailsForOneApplicant(
+      page,
+      applicant1ExpenditureDetails,
+      1
+    );
+  }
+  if (applicant2ExpenditureDetails) {
+    handleExpenditureDetailsForOneApplicant(
+      page,
+      applicant2ExpenditureDetails,
+      2
+    );
   }
 }
 
