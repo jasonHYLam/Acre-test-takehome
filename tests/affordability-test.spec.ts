@@ -15,6 +15,7 @@ import {
 } from "../helpers/utils";
 import { handleMortgageDetails } from "../helpers/handleMortgageDetails";
 import { handleIncomeDetails } from "../helpers/handleIncomeDetails";
+import { handleExpenditureDetails } from "../helpers/handleExpenditureDetails";
 
 // Table test which takes array of input and applies the same test to each.
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
@@ -33,28 +34,7 @@ testData.forEach((input, index) => {
     }
 
     if (input.allExpenditureDetails) {
-      // TODO: Create module to handle expenditureDetails
-      await page.getByText("3 Expenditure").click();
-
-      const { applicant1ExpenditureDetails, applicant2ExpenditureDetails } =
-        input.allExpenditureDetails;
-
-      if (applicant1ExpenditureDetails) {
-        if (
-          applicant1ExpenditureDetails.monthlyBTLOutgoings ||
-          applicant1ExpenditureDetails.monthlyBTLOutgoings === 0
-        ) {
-          await page
-            .getByRole("spinbutton", { name: "Existing Monthly BTL" })
-            .click();
-          await page
-            .getByRole("spinbutton", { name: "Existing Monthly BTL" })
-            .fill(applicant1ExpenditureDetails.monthlyBTLOutgoings.toString());
-          await page
-            .getByRole("spinbutton", { name: "Existing Monthly BTL" })
-            .press("Enter");
-        }
-      }
+      await handleExpenditureDetails(page, input.allExpenditureDetails);
     }
 
     await page.getByText("view", { exact: true }).click();
