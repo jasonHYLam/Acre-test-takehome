@@ -154,6 +154,9 @@ export async function handleMortgageDetails(
   }
 
   if (mortgageTerm) {
+    if (mortgageTerm >= 5 && mortgageTerm <= 40) {
+      await page.selectOption("requiredMortgageTerm", mortgageTerm.toString());
+    }
   }
   if (assessOnInterestOnlyBasis) {
   }
