@@ -4,6 +4,7 @@ import {
   AllIncomeDetails,
   IncomeDetails,
   ExpenditureDetails,
+  AllExpenditureDetails,
 } from "./types";
 
 // Checks if valid mortgage details (property value) is present.
@@ -69,7 +70,7 @@ function checkValidIncomeDetailsForLendingForJointMortgage(
   );
 }
 
-// Calculates total income, handles single or double applicant scenarios.
+// Calculates total income, used for checking lending. Handles single or double applicant scenarios.
 export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
   let totalIncome = 0;
 
@@ -98,7 +99,25 @@ function calculateIncomeForApplicant(incomeDetails: IncomeDetails) {
   return totalIncomeForApplicant;
 }
 
-// TODO: Calculate total expenditure
+// Calculates total expenditure, used for checking lending. Handles single or double applicant scenarios.
+export function calculateTotalExpenditure(
+  allExpenditureDetails: AllExpenditureDetails
+) {
+  let totalExpenditure = 0;
+
+  if (allExpenditureDetails.applicant1ExpenditureDetails) {
+    const expenditure = allExpenditureDetails.applicant1ExpenditureDetails;
+    totalExpenditure + calculateExpenditureForApplicant(expenditure);
+  }
+
+  if (allExpenditureDetails.applicant2ExpenditureDetails) {
+    const expenditure = allExpenditureDetails.applicant2ExpenditureDetails;
+    totalExpenditure + calculateExpenditureForApplicant(expenditure);
+  }
+
+  return totalExpenditure;
+}
+
 function calculateExpenditureForApplicant(
   expenditureDetails: ExpenditureDetails
 ) {
