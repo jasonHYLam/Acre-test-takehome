@@ -1,5 +1,5 @@
 export interface ProvidedDetails {
-  testName?: string;
+  testName: string;
   mortgageDetails?: MortgageDetails;
   allIncomeDetails?: AllIncomeDetails;
   allExpenditureDetails?: AllExpenditureDetails;
