@@ -12,7 +12,7 @@ export interface MortgageDetails {
   applicant2Age?: number;
   applicant1EmploymentStatus?: EmploymentStatus;
   applicant2EmploymentStatus?: EmploymentStatus;
-  maritalStatus?: string;
+  maritalStatus?: MaritalStatus;
   dependantChildren?: number;
   dependantAdults?: number;
   depositAmount?: number;
@@ -37,6 +37,15 @@ type EmploymentStatus =
   | "Student"
   | "Key/Part Time"
   | "Unemployed";
+
+type MaritalStatus =
+  | "Unknown"
+  | "Single"
+  | "Living Together"
+  | "Married"
+  | "Divorced"
+  | "Widowed"
+  | "Separated";
 
 export interface AllIncomeDetails {
   applicant1IncomeDetails?: IncomeDetails;

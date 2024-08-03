@@ -85,7 +85,25 @@ export async function handleMortgageDetails(
       await page.selectOption("a1employmentStatus", "U");
     }
   }
+
   if (applicant2EmploymentStatus) {
+    if (applicant2EmploymentStatus === "Unknown") {
+      await page.selectOption("a2employmentStatus", "X");
+    } else if (applicant2EmploymentStatus === "Employed") {
+      await page.selectOption("a2employmentStatus", "E");
+    } else if (applicant2EmploymentStatus === "Self-employed") {
+      await page.selectOption("a2employmentStatus", "S");
+    } else if (applicant2EmploymentStatus === "Homemaker") {
+      await page.selectOption("a2employmentStatus", "H");
+    } else if (applicant2EmploymentStatus === "Receiving Pension") {
+      await page.selectOption("a2employmentStatus", "P");
+    } else if (applicant2EmploymentStatus === "Student") {
+      await page.selectOption("a2employmentStatus", "G");
+    } else if (applicant2EmploymentStatus === "Key/Part Time") {
+      await page.selectOption("a2employmentStatus", "K");
+    } else if (applicant2EmploymentStatus === "Unemployed") {
+      await page.selectOption("a2employmentStatus", "U");
+    }
   }
   if (maritalStatus) {
   }
