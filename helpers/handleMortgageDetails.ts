@@ -27,8 +27,44 @@ export async function handleMortgageDetails(
     propertyPostcode,
   } = mortgageDetails;
 
+  if (purchaserType) {
+  }
+  if (jointMortgage) {
+  }
+  if (maxLTV) {
+  }
+  if (applicant1Age) {
+  }
+  if (applicant2Age) {
+  }
+  if (applicant1EmploymentStatus) {
+  }
+  if (applicant2EmploymentStatus) {
+  }
+  if (martialStatus) {
+  }
+  if (dependantChildren) {
+  }
+  if (dependantAdults) {
+  }
+  if (depositAmount) {
+    const depositAmountInput = page.getByLabel("Deposit Amount:");
+    await clickAndEnterNumericalInput(depositAmountInput, depositAmount);
+  }
+  if (loanAmount) {
+    const loanAmountInput = page.getByLabel("Loan Amount:");
+    await clickAndEnterNumericalInput(loanAmountInput, loanAmount);
+  }
+
   if (propertyValue || propertyValue === 0) {
     const propertyValueInput = page.getByLabel("Property Value:");
     await clickAndEnterNumericalInput(propertyValueInput, propertyValue);
+  }
+
+  if (mortgageTerm) {
+  }
+  if (assessOnInterestOnlyBasis) {
+  }
+  if (propertyPostcode) {
   }
 }
