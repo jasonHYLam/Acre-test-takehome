@@ -61,7 +61,7 @@ export async function handleMortgageDetails(
   }
 
   if (applicant2Age) {
-    if (applicant2Age >= 18 || applicant2Age <= 99) {
+    if (applicant2Age >= 18 && applicant2Age <= 99) {
       await page.selectOption("a2applicantsAge", applicant2Age.toString());
     }
   }
@@ -124,9 +124,21 @@ export async function handleMortgageDetails(
     }
   }
   if (dependantChildren) {
+    if (dependantChildren >= 0 && dependantChildren <= 4) {
+      page.selectOption("noDependantChildren", dependantChildren.toString());
+    } else if (dependantChildren >= 5) {
+      page.selectOption("noDependantChildren", "5+");
+    }
   }
+
   if (dependantAdults) {
+    if (dependantAdults >= 0 && dependantAdults <= 4) {
+      page.selectOption("noDependantAdults", dependantAdults.toString());
+    } else if (dependantAdults >= 5) {
+      page.selectOption("noDependantAdults", "5+");
+    }
   }
+
   if (depositAmount) {
     const depositAmountInput = page.getByLabel("Deposit Amount:");
     await clickAndEnterNumericalInput(depositAmountInput, depositAmount);
