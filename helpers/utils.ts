@@ -1,5 +1,7 @@
 import { ProvidedDetails, AllIncomeDetails } from "./types";
 
+// Checks if valid mortgage details (property value) is present.
+// TODO: Add propertyValue check (where did it go)
 export function checkValidMortgageDetailsForLending(
   providedDetails: ProvidedDetails
 ) {
@@ -9,6 +11,7 @@ export function checkValidMortgageDetailsForLending(
   return false;
 }
 
+// Checks if valid income details (gross income and foreignCurrency) are present; handles sole and joint mortgage cases.
 export function checkValidIncomeDetailsForLending(
   providedDetails: ProvidedDetails
 ) {
@@ -16,11 +19,14 @@ export function checkValidIncomeDetailsForLending(
     const { jointMortgage } = providedDetails.mortgageDetails;
 
     if (providedDetails.allIncomeDetails) {
+      // The case when sole mortgage.
       if (jointMortgage === null || !jointMortgage) {
         return checkValidIncomeDetailsForLendingForSoleMortgage(
           providedDetails.allIncomeDetails
         );
-      } else {
+      }
+      // The case when joint mortgage.
+      else {
         return checkValidIncomeDetailsForLendingForJointMortgage(
           providedDetails.allIncomeDetails
         );
@@ -31,6 +37,7 @@ export function checkValidIncomeDetailsForLending(
   return false;
 }
 
+// TODO: Add check for foreignCurrency
 function checkValidIncomeDetailsForLendingForSoleMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
@@ -43,6 +50,7 @@ function checkValidIncomeDetailsForLendingForSoleMortgage(
   );
 }
 
+// TODO: Add check for foreignCurrency
 function checkValidIncomeDetailsForLendingForJointMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
@@ -58,7 +66,7 @@ function checkValidIncomeDetailsForLendingForJointMortgage(
   );
 }
 
-// TODO: Calculate total income
+// Calculates total income, handles single or double applicant scenarios.
 export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
   let totalIncome = 0;
 
