@@ -10,7 +10,7 @@ I have written table-driven tests as directed by the assignment brief. The table
 
 The input data is provided in the `inputData.ts` file. I believe this would suffice for a takehome assignment as I have interpreted the purpose of the assignment to focus more on the data's types and range rather than the way it is setup, however in a real-world scenario I would obtain the data from a database.
 
-The input data can take all possible input from the HSB affordability residential calculator. Types are introduced to ensure that the structure of the data is consistent.
+The input data can take all possible input from the HSB affordability residential calculator. Types are introduced to ensure that the structure of the data is consistent. Additionally, the use of union types ensure that certain input is restricted to expected values, which is useful for select input types such as Marital Status, Maximum LTV etc.
 
 I have separated concerns by putting constants, types, and util helper functions in their respective files and importing them where necessary.
 
