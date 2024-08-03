@@ -36,11 +36,14 @@ export async function handleMortgageDetails(
       await page.selectOption("#purchaserType", "T");
     }
   }
-  if (jointMortgage) {
-    await page.getByText("Joint Mortgage:").press("Enter");
-
-    // TODO:
+  if (jointMortgage || jointMortgage === false) {
+    if (jointMortgage) {
+      await page.selectOption("isJointMortgage", "1");
+    } else {
+      await page.selectOption("isJointMortgage", "0");
+    }
   }
+
   if (maxLTV) {
     await page.getByText("Maximum LTV:").press("Enter");
     // TODO:
