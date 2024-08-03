@@ -45,9 +45,15 @@ export async function handleMortgageDetails(
   }
 
   if (maxLTV) {
-    await page.getByText("Maximum LTV:").press("Enter");
-    // TODO:
+    if (maxLTV === 0.85) {
+      await page.selectOption("maximumLTV", "85");
+    } else if (maxLTV === 0.9) {
+      await page.selectOption("maximumLTV", "90");
+    } else {
+      await page.selectOption("maximumLTV", "95");
+    }
   }
+
   if (applicant1Age) {
     await page.getByText("Applicant 1's Age:").press("Enter");
   }
