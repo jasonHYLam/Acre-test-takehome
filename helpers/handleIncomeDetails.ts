@@ -15,7 +15,7 @@ export async function handleIncomeDetails(
       await page.getByRole("spinbutton", { name: "Gross Income:" }).click();
       await page
         .getByRole("spinbutton", { name: "Gross Income:" })
-        .fill("100000");
+        .fill(applicant1IncomeDetails.grossIncome?.toString());
       await page
         .getByRole("spinbutton", { name: "Gross Income:" })
         .press("Enter");
