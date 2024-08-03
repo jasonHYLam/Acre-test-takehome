@@ -28,27 +28,29 @@ export async function handleMortgageDetails(
   } = mortgageDetails;
 
   if (purchaserType) {
-    await page.getByRole("button", { name: "Buying first house" }).click();
-    // TODO:
+    if (purchaserType === "Buying first house") {
+      await page.selectOption("#purchaserType", "F");
+    } else if (purchaserType === "Buying first house - moving") {
+      await page.selectOption("#purchaserType", "M");
+    } else if (purchaserType === "Moving to HSBC") {
+      await page.selectOption("#purchaserType", "T");
+    }
   }
   if (jointMortgage) {
-    await page.getByRole("button", { name: "Sole" }).click();
-    // TODO:
-  }
-  if (maxLTV) {
-    await page
-      .getByRole("button", { name: "Less than or equal 85% (LTI 4" })
-      .click();
+    await page.getByText("Joint Mortgage:").press("Enter");
 
     // TODO:
   }
+  if (maxLTV) {
+    await page.getByText("Maximum LTV:").press("Enter");
+    // TODO:
+  }
   if (applicant1Age) {
-    await page.getByRole("button", { name: "18" }).first().click();
+    await page.getByText("Applicant 1's Age:").press("Enter");
   }
   if (applicant2Age) {
   }
   if (applicant1EmploymentStatus) {
-    await page.getByRole("button", { name: "Unknown" }).first().click();
   }
   if (applicant2EmploymentStatus) {
   }
