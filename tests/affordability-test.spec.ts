@@ -5,7 +5,6 @@ import { testData } from "./testData/testData";
 
 import {
   CALCULATOR_URL,
-  TITLE,
   MIN_PROPERTY_VALUE,
   MIN_INCOME_VALUE,
   MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING,
@@ -24,6 +23,7 @@ testData.forEach((input, index) => {
   test(testTitle, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
     if (input.mortgageDetails) {
+      // TODO: Create module to handle mortgageDetails
       await page.getByText("1 Mortgage Details").click();
       if (
         input.mortgageDetails.propertyValue ||
@@ -38,6 +38,7 @@ testData.forEach((input, index) => {
     }
 
     if (input.allIncomeDetails) {
+      // TODO: Create module to handle incomeDetails
       await page.getByText("2 Income").click();
       const { applicant1IncomeDetails, applicant2IncomeDetails } =
         input.allIncomeDetails;
@@ -70,6 +71,7 @@ testData.forEach((input, index) => {
     }
 
     if (input.allExpenditureDetails) {
+      // TODO: Create module to handle expenditureDetails
       await page.getByText("3 Expenditure").click();
 
       const { applicant1ExpenditureDetails, applicant2ExpenditureDetails } =
@@ -95,6 +97,8 @@ testData.forEach((input, index) => {
 
     await page.getByText("view", { exact: true }).click();
 
+    // TODO: Create module to handle results
+    // ^ This may require creating further sub modules
     const validMortgageDetailsForLending =
       checkValidMortgageDetailsForLending(input);
 
