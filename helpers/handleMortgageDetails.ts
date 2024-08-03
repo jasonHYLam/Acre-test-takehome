@@ -105,7 +105,23 @@ export async function handleMortgageDetails(
       await page.selectOption("a2employmentStatus", "U");
     }
   }
+
   if (maritalStatus) {
+    if (maritalStatus === "Unknown") {
+      page.selectOption("a1maritalStatus", "U");
+    } else if (maritalStatus === "Single") {
+      page.selectOption("a1maritalStatus", "S");
+    } else if (maritalStatus === "Living Together") {
+      page.selectOption("a1maritalStatus", "L");
+    } else if (maritalStatus === "Married") {
+      page.selectOption("a1maritalStatus", "M");
+    } else if (maritalStatus === "Divorced") {
+      page.selectOption("a1maritalStatus", "D");
+    } else if (maritalStatus === "Widowed") {
+      page.selectOption("a1maritalStatus", "W");
+    } else if (maritalStatus === "Separated") {
+      page.selectOption("a1maritalStatus", "Z");
+    }
   }
   if (dependantChildren) {
   }
