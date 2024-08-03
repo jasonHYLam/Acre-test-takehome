@@ -55,10 +55,17 @@ export async function handleMortgageDetails(
   }
 
   if (applicant1Age) {
-    await page.getByText("Applicant 1's Age:").press("Enter");
+    if (applicant1Age >= 18 || applicant1Age <= 99) {
+      await page.selectOption("a1applicantsAge", applicant1Age.toString());
+    }
   }
+
   if (applicant2Age) {
+    if (applicant2Age >= 18 || applicant2Age <= 99) {
+      await page.selectOption("a2applicantsAge", applicant2Age.toString());
+    }
   }
+
   if (applicant1EmploymentStatus) {
   }
   if (applicant2EmploymentStatus) {
