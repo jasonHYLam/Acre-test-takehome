@@ -58,13 +58,12 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
               input.allIncomeDetails.applicant1IncomeDetails;
 
             // Checks when expenditure exists
-            // TODO: Test case where expenditure exceeds maximum, such that lending is 0.
-            // ^ This might be based on ratio of income to expenditure...
             if (input.allExpenditureDetails) {
               const totalExpenditure = calculateTotalExpenditure(
                 input.allExpenditureDetails
               );
 
+              // Cases where expenditure exceeds maximum (based on expenditure to income ratio), such that lending is 0.
               if (
                 totalExpenditure / grossIncome >
                 MAX_EXPENDITURE_TO_INCOME_RATIO_FOR_LENDING
@@ -77,13 +76,17 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
                   "NOT AVAILABLE"
                 );
               }
+
+              // Cases where expenditure doesn't exceed maximum. There are edge cases however, like when both income and expenditure are low.
+              else {
+                // TODO: Handle case when gross income is minimum; results in no lending
+              }
             }
 
-            // Checks when no expenditure exists
+            // Cases when expenditure is nill.
             else {
               // Case where income is too low compared to property value for lending.
-              // TODO: Change to total income rather than gross income.
-              // There is a strange relationship; gross income seems to hold more weight compared to the other income inputs. So the above TODO may not be relevant
+              // TODO: Add to if block; consider ratio of total income to property ratio.
               if (
                 grossIncome / propertyValue <
                 MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING

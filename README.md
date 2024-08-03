@@ -16,7 +16,7 @@ I have observed that several of the inputs do not seem to affect the lending cal
 
 I have separated concerns by putting constants, types, and util helper functions in their respective files and importing them where necessary.
 
-I have created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I have given descriptive and meaningful names for each.
+I have created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I later found out that this may not be necessary, but have kept it for readability. I have given descriptive and meaningful names for each.
 
 I have separated the major aspects of the test into separate modules that handle one responsibility. These modules are `handleMortgageDetails`, `handleIncomeDetails`, `handleExpenditureDetails` and `checkResults`.
 
@@ -31,6 +31,8 @@ I have used the Prettier VSCode extension for formatting code.
 The test needs to handle cases where there is a single applicant or two applicants. To handle this, the input data is structured such that the income and expenditure details contain either one applicant's data or two applicant's data. There are helper functions throughout to reduce code duplication and to promote DRY (don't repeat yourself) where necessary.
 
 I do not know the exact workings of the calculator and the relationship between income, expenditure and mortgage details. I wasn't sure how much expenditure lead to no lending with certain values of income and mortgage property value. That being said I have attempted to write scenarios with different values for each category, such that lending is either given or not given.
+
+There were many edge cases due to the complex relationship between income, expenditure and properties. For instance, when expenditure is extremely low (1) and income is at the minimum required for lending (10000), that results in no lending. I found these very difficult to capture entirely through if blocks.
 
 ## Build and Run
 
