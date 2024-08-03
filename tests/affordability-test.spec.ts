@@ -37,6 +37,7 @@ testData.forEach((input, index) => {
       await handleExpenditureDetails(page, input.allExpenditureDetails);
     }
 
+    // ===
     await page.getByText("view", { exact: true }).click();
 
     // TODO: Create module to handle results
@@ -127,5 +128,6 @@ testData.forEach((input, index) => {
         "NOT AVAILABLE"
       );
     }
+    // ===
   });
 });
