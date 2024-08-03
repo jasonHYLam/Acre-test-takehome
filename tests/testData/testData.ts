@@ -4,8 +4,9 @@ import { ProvidedDetails } from "../../helpers/types";
 // TODO: Set value for expenditure that causes 0 lending
 // TODO: Consider average user; 30-40 years old, etc.
 export const testData: ProvidedDetails[] = [
-  // Input data for scenario where lending is given, as minimum details for lending are given.
   {
+    testName:
+      "Scenario where lending is given, as minimum details (property value, gross income, foreign currency) for lending are given.",
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {
       applicant1IncomeDetails: {
@@ -15,8 +16,9 @@ export const testData: ProvidedDetails[] = [
     },
   },
 
-  // Input data for scenario where lending is given, with additional mortgage details provided.
   {
+    testName:
+      "Scenario where lending is given, with additional mortgage details provided.",
     mortgageDetails: {
       propertyValue: 1000000,
       jointMortgage: false,
@@ -31,16 +33,18 @@ export const testData: ProvidedDetails[] = [
     },
   },
 
-  // Input data for scenario where lending is not given, as income is too low compared to property value.
   {
+    testName:
+      "Scenario where lending is not given, as income is too low compared to property value.",
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 10000, foreignCurrency: false },
     },
   },
 
-  // Input data for scenario where lending is not given, as expenditure is too great.
   {
+    testName:
+      "scenario where lending is not given, as expenditure is too great.",
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
@@ -50,38 +54,42 @@ export const testData: ProvidedDetails[] = [
     },
   },
 
-  // Input data for scenario where lending is not given, as foreignCurrency is not provided.
   {
+    testName:
+      "Scenario where lending is not given, as foreignCurrency is not provided.",
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 100000 },
     },
   },
 
-  // Input data for scenario where lending is not given, as propertyValue is 0.
   {
+    testName: "Scenario where lending is not given, as propertyValue is 0.",
     mortgageDetails: { propertyValue: 0 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 0, foreignCurrency: false },
     },
   },
 
-  // Input data for scenario where lending is not given, as propertyValue is a negative integer.
   {
+    testName:
+      "Scenario where lending is not given, as propertyValue is a negative integer.",
     mortgageDetails: { propertyValue: -1 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 0, foreignCurrency: false },
     },
   },
 
-  // Input data for scenario where lending is not given, as propertyValue is below minimum property value.
   {
+    testName:
+      "Scenario where lending is not given, as propertyValue is below minimum property value.",
     mortgageDetails: { propertyValue: 1 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
     },
   },
 
-  // Input data for scenario where no details are provided.
-  {},
+  {
+    testName: "Scenario where no details are provided.",
+  },
 ];
