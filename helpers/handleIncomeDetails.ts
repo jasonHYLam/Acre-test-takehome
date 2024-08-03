@@ -24,6 +24,8 @@ export async function handleIncomeDetails(
       await clickAndEnterNumericalInput(grossIncomeInput, grossIncome);
     }
 
+    // TODO: This current only handles one applicant.
+    // ^ Modify such that either a single or both applicants are handled.
     // TODO: Modify this to handle the other cases; currently only handles No; may require switch statement
     //  await page.getByRole('button', { name: 'Nothing selected' }).click();
     //  await page.getByRole('menu').locator('a').filter({ hasText: 'Yes - 30% Haircut to be' }).click();
