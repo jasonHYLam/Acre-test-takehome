@@ -12,6 +12,8 @@ The input data is provided in the `inputData.ts` file. I believe this would suff
 
 The input data can take all possible input from the HSB affordability residential calculator. Types are introduced to ensure that the structure of the data is consistent. Additionally, the use of union types ensure that certain input is restricted to expected values, which is useful for select input types such as Marital Status, Maximum LTV etc.
 
+I have observed that several of the inputs do not seem to affect the lending calculation, such as postcode. I have nonetheless included them in the allowed range of input as well as handling input actions.
+
 I have separated concerns by putting constants, types, and util helper functions in their respective files and importing them where necessary.
 
 I have created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I have given descriptive and meaningful names for each.
