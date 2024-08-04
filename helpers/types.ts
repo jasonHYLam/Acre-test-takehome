@@ -1,6 +1,6 @@
 export interface TestEntry {
   testName: string;
-  providedDetails?: ProvidedDetails;
+  providedDetails: ProvidedDetails;
   expectedResult: ExpectedResult;
 }
 

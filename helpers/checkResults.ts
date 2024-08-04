@@ -1,7 +1,7 @@
 // @ts-check
 
 import { expect, Page } from "@playwright/test";
-import { ProvidedDetails } from "./types";
+import { ExpectedResult, ProvidedDetails } from "./types";
 import {
   MIN_PROPERTY_VALUE,
   MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING,
@@ -15,7 +15,11 @@ import {
 } from "./utils";
 
 // TODO: Add expectedResults to argument list
-export async function checkResults(page: Page, input: ProvidedDetails) {
+export async function checkResults(
+  page: Page,
+  providedDetails: ProvidedDetails,
+  expectedResult: ExpectedResult
+) {
   await page.getByText("view", { exact: true }).click();
 
   const resultErrorsLocator = page.locator("#result-errors");
@@ -26,10 +30,11 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
   );
 
   const validMortgageDetailsForLending =
-    checkValidMortgageDetailsForLending(input);
+    checkValidMortgageDetailsForLending(providedDetails);
 
   // This seems to miss test 5 where foreignCurrency is not given
-  const validIncomeDetailsForLending = checkValidIncomeDetailsForLending(input);
+  const validIncomeDetailsForLending =
+    checkValidIncomeDetailsForLending(providedDetails);
 
   // Checks scenarios where minimum criteria for lending are met.
   if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
@@ -47,26 +52,31 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
     const resultantLTVAsInt = Number(resultantLTVAsString);
 
     // Checks that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
-    if (input.mortgageDetails?.propertyValue) {
-      const { propertyValue } = input.mortgageDetails;
+    if (providedDetails.mortgageDetails?.propertyValue) {
+      const { propertyValue } = providedDetails.mortgageDetails;
       if (propertyValue >= MIN_PROPERTY_VALUE) {
         // Cases when (some) income details are provided.
-        if (input.allIncomeDetails) {
-          const totalIncome = calculateTotalIncome(input.allIncomeDetails);
+        if (providedDetails.allIncomeDetails) {
+          const totalIncome = calculateTotalIncome(
+            providedDetails.allIncomeDetails
+          );
 
           // TODO: Consider foreignCurrency. If it exists, it will reduce lending, possibly result in no lending.
           // TODO: Consider assess on interest only basis; if yes, it will increase lending but may not affect expenditure's effect on lending.
           // TODO: Consider mortgage term; increasing it will increase lending
 
           // Cases when gross income is existent.
-          if (input.allIncomeDetails.applicant1IncomeDetails?.grossIncome) {
+          if (
+            providedDetails.allIncomeDetails.applicant1IncomeDetails
+              ?.grossIncome
+          ) {
             const { grossIncome } =
-              input.allIncomeDetails.applicant1IncomeDetails;
+              providedDetails.allIncomeDetails.applicant1IncomeDetails;
 
             // Checks when expenditure exists
-            if (input.allExpenditureDetails) {
+            if (providedDetails.allExpenditureDetails) {
               const totalExpenditure = calculateTotalExpenditure(
-                input.allExpenditureDetails
+                providedDetails.allExpenditureDetails
               );
 
               // Cases where expenditure exceeds maximum (based on expenditure to income ratio), such that lending is 0.
@@ -111,7 +121,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
       }
 
       // Checks edge cases where property value is less than or equal to 0.
-      else if (input.mortgageDetails.propertyValue <= 0) {
+      else if (providedDetails.mortgageDetails.propertyValue <= 0) {
         await expect(resultErrorsLocator).toBeVisible();
         await expect(lendingBasedOnPropertyLocator).toContainText("0");
         await expect(resultantLTVLocator).toContainText("0");

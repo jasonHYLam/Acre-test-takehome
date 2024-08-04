@@ -37,6 +37,6 @@ testData.forEach((testEntry) => {
     }
 
     // TODO: Add expectedResults to argument
-    await checkResults(page, input, expectedResult);
+    await checkResults(page, providedDetails, expectedResult);
   });
 });

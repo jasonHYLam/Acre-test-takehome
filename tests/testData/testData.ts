@@ -171,6 +171,7 @@ export const testData: TestEntry[] = [
 
   {
     testName: "Scenario where no details are provided.",
+    providedDetails: {},
     expectedResult: {
       resultErrors: true,
       lendingBasedOnProperty: "NOT AVAILABLE",
