@@ -35,6 +35,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
     await expect(resultErrorsLocator).toBeHidden();
     await expect(lendingBasedOnPropertyLocator).toBeVisible();
 
+    // TODO: Create helper functions to return numerical values
     // These values are formatted as strings when displayed on the page and must be converted to numbers for the following comparison.
     const lendingBasedOnPropertyAsString =
       await lendingBasedOnPropertyLocator.textContent();
@@ -51,6 +52,10 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
         // Cases when (some) income details are provided.
         if (input.allIncomeDetails) {
           const totalIncome = calculateTotalIncome(input.allIncomeDetails);
+
+          // TODO: Consider foreignCurrency. If it exists, it will reduce lending, possibly result in no lending.
+          // TODO: Consider assess on interest only basis; if yes, it will increase lending but may not affect expenditure's effect on lending.
+          // TODO: Consider mortgage term; increasing it will increase lending
 
           // Cases when gross income is existent.
           if (input.allIncomeDetails.applicant1IncomeDetails?.grossIncome) {
