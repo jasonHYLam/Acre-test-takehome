@@ -3,6 +3,7 @@ export interface ProvidedDetails {
   mortgageDetails?: MortgageDetails;
   allIncomeDetails?: AllIncomeDetails;
   allExpenditureDetails?: AllExpenditureDetails;
+  expectedResult: ExpectedResult;
 }
 
 export interface MortgageDetails {
@@ -82,6 +83,7 @@ type MaxLTV = 0.85 | 0.9 | 0.95;
 type ForeignCurrency = false | 0.1 | 0.2 | 0.3;
 
 export interface ExpectedResult {
+  resultErrors: boolean;
   lendingBasedOnProperty: string;
   resultantLTV: string;
   lendingBasedOnAffordability: string;
