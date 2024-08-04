@@ -3,6 +3,8 @@ export interface TestEntry {
   providedDetails: ProvidedDetails;
   expectedResult: ExpectedResult;
 }
+
+// TODO: Change this to remove testName and expectedResult
 export interface ProvidedDetails {
   testName: string;
   mortgageDetails?: MortgageDetails;

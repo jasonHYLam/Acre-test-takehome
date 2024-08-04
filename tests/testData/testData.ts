@@ -2,6 +2,9 @@ import { ProvidedDetails } from "../../helpers/types";
 // Input data is an array containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 
 // TODO: Consider average user; 30-40 years old, etc.
+// TODO: Change from ProvidedDetails[] type to TestEntry[] type
+// TODO: Add providedDetails object and add details to it.
+
 export const testData: ProvidedDetails[] = [
   {
     testName:

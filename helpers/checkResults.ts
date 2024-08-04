@@ -14,6 +14,7 @@ import {
   calculateTotalIncome,
 } from "./utils";
 
+// TODO: Add expectedResults to argument list
 export async function checkResults(page: Page, input: ProvidedDetails) {
   await page.getByText("view", { exact: true }).click();
 

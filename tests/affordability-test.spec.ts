@@ -12,8 +12,9 @@ import { checkResults } from "../helpers/checkResults";
 // Table test which takes array of input and applies the same test to each.
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 
-// Perhaps change this to test entry
+// TODO: change this to testEntry
 testData.forEach((input) => {
+  // TODO: Destructure testEntry to {testName, providedDetails, expectedResults} = testEntry
   test(input.testName, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
     if (input.mortgageDetails) {
@@ -28,6 +29,7 @@ testData.forEach((input) => {
       await handleExpenditureDetails(page, input.allExpenditureDetails);
     }
 
+    // TODO: Add expectedResults to argument
     await checkResults(page, input);
   });
 });
