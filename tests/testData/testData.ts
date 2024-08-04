@@ -13,6 +13,12 @@ export const testData: ProvidedDetails[] = [
         foreignCurrency: false,
       },
     },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnProperty: 185950,
+      resultantLTV: 19,
+      lendingBasedOnAffordability: 185950,
+    },
   },
 
   {
@@ -30,6 +36,12 @@ export const testData: ProvidedDetails[] = [
         foreignCurrency: false,
       },
     },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnProperty: 185950,
+      resultantLTV: 19,
+      lendingBasedOnAffordability: 185950,
+    },
   },
 
   {
@@ -39,17 +51,29 @@ export const testData: ProvidedDetails[] = [
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 10000, foreignCurrency: false },
     },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnProperty: "NOT AVAILABLE",
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
+    },
   },
 
   {
     testName:
-      "scenario where lending is not given, as expenditure is too great.",
+      "Scenario where lending is not given, as expenditure is too great compared to income.",
     mortgageDetails: { propertyValue: 1000000 },
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
     },
     allExpenditureDetails: {
-      applicant1ExpenditureDetails: { monthlyBTLOutgoings: 3700 },
+      applicant1ExpenditureDetails: { monthlyBTLOutgoings: 3800 },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnProperty: "NOT AVAILABLE",
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
     },
   },
 
@@ -60,13 +84,25 @@ export const testData: ProvidedDetails[] = [
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 100000 },
     },
+    expectedResult: {
+      resultErrors: true,
+      lendingBasedOnProperty: 0,
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
+    },
   },
 
   {
     testName: "Scenario where lending is not given, as propertyValue is 0.",
     mortgageDetails: { propertyValue: 0 },
     allIncomeDetails: {
-      applicant1IncomeDetails: { grossIncome: 0, foreignCurrency: false },
+      applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
+    },
+    expectedResult: {
+      resultErrors: true,
+      lendingBasedOnProperty: 0,
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
     },
   },
 
@@ -75,7 +111,13 @@ export const testData: ProvidedDetails[] = [
       "Scenario where lending is not given, as propertyValue is a negative integer.",
     mortgageDetails: { propertyValue: -1 },
     allIncomeDetails: {
-      applicant1IncomeDetails: { grossIncome: 0, foreignCurrency: false },
+      applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
+    },
+    expectedResult: {
+      resultErrors: true,
+      lendingBasedOnProperty: 0,
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
     },
   },
 
@@ -86,9 +128,21 @@ export const testData: ProvidedDetails[] = [
     allIncomeDetails: {
       applicant1IncomeDetails: { grossIncome: 100000, foreignCurrency: false },
     },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnProperty: "NOT AVAILABLE",
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
+    },
   },
 
   {
     testName: "Scenario where no details are provided.",
+    expectedResult: {
+      resultErrors: true,
+      lendingBasedOnProperty: "NOT AVAILABLE",
+      resultantLTV: 0,
+      lendingBasedOnAffordability: "NOT AVAILABLE",
+    },
   },
 ];
