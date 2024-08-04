@@ -80,3 +80,9 @@ export interface ExpenditureDetails {
 type MaxLTV = 0.85 | 0.9 | 0.95;
 
 type ForeignCurrency = false | 0.1 | 0.2 | 0.3;
+
+export interface ExpectedResult {
+  lendingBasedOnProperty: string;
+  resultantLTV: string;
+  lendingBasedOnAffordability: string;
+}
