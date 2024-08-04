@@ -1,3 +1,8 @@
+export interface TestEntry {
+  testName: string;
+  providedDetails: ProvidedDetails;
+  expectedResult: ExpectedResult;
+}
 export interface ProvidedDetails {
   testName: string;
   mortgageDetails?: MortgageDetails;

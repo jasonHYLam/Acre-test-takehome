@@ -135,6 +135,7 @@ export async function checkResults(page: Page, input: ProvidedDetails) {
   // Checks scenarios where minimum criteria for lending are NOT met.
   else {
     // If valid details are not provided, expect errors to be displayed.
+    // TODO: Handle expectedResults!
     await expect(resultErrorsLocator).toBeVisible();
     await expect(lendingBasedOnPropertyLocator).toContainText("0");
     await expect(resultantLTVLocator).toContainText("0");
