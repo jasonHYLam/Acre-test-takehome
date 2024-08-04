@@ -13,23 +13,30 @@ import { checkResults } from "../helpers/checkResults";
 // Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 
 // TODO: change this to testEntry
-testData.forEach((input) => {
+testData.forEach((testEntry) => {
   // TODO: Destructure testEntry to {testName, providedDetails, expectedResults} = testEntry
-  test(input.testName, async ({ page }) => {
+  const { testName, providedDetails, expectedResult } = testEntry;
+  test(testName, async ({ page }) => {
     await page.goto(CALCULATOR_URL);
-    if (input.mortgageDetails) {
-      await handleMortgageDetails(page, input.mortgageDetails);
-    }
 
-    if (input.allIncomeDetails) {
-      await handleIncomeDetails(page, input.allIncomeDetails);
-    }
+    if (providedDetails) {
+      if (providedDetails.mortgageDetails) {
+        await handleMortgageDetails(page, providedDetails.mortgageDetails);
+      }
 
-    if (input.allExpenditureDetails) {
-      await handleExpenditureDetails(page, input.allExpenditureDetails);
+      if (providedDetails.allIncomeDetails) {
+        await handleIncomeDetails(page, providedDetails.allIncomeDetails);
+      }
+
+      if (providedDetails.allExpenditureDetails) {
+        await handleExpenditureDetails(
+          page,
+          providedDetails.allExpenditureDetails
+        );
+      }
     }
 
     // TODO: Add expectedResults to argument
-    await checkResults(page, input);
+    await checkResults(page, input, expectedResult);
   });
 });
