@@ -170,6 +170,78 @@ export const testData: TestEntry[] = [
 
   {
     testName:
+      "Scenario where lending is not given for joint mortgage, as expenditure is too great.",
+    providedDetails: {
+      mortgageDetails: {
+        purchaserType: "Buying first house - moving",
+        jointMortgage: true,
+        maxLTV: 0.9,
+        applicant1Age: 40,
+        applicant2Age: 39,
+        applicant1EmploymentStatus: "Employed",
+        applicant2EmploymentStatus: "Self-employed",
+        maritalStatus: "Married",
+        dependantChildren: 2,
+        dependantAdults: 1,
+        depositAmount: 20000,
+        loanAmount: 10000,
+        propertyValue: 1000000,
+        mortgageTerm: 25,
+        assessOnInterestOnlyBasis: true,
+        propertyPostcode: "SW",
+      },
+
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 100000,
+          foreignCurrency: 0.1,
+          additionalIncome: 10000,
+          limitedCompanyNetProfits: 20000,
+          otherNonTaxableIncome: 3000,
+          existingBTLRentalIncome: 40000,
+        },
+        applicant2IncomeDetails: {
+          grossIncome: 120000,
+          foreignCurrency: 0.2,
+          additionalIncome: 5000,
+          limitedCompanyNetProfits: 40000,
+          otherNonTaxableIncome: 2000,
+          existingBTLRentalIncome: 20000,
+        },
+      },
+
+      allExpenditureDetails: {
+        applicant1ExpenditureDetails: {
+          monthlyBTLOutgoings: 10000,
+          monthlyLoanPayments: 400,
+          creditCards: 3000,
+          groundRent: 1000,
+          travel: 300,
+          childCareCosts: 200,
+          otherExpenditure: 1000,
+        },
+        applicant2ExpenditureDetails: {
+          monthlyBTLOutgoings: 20000,
+          monthlyLoanPayments: 500,
+          creditCards: 3000,
+          groundRent: 1000,
+          travel: 300,
+          childCareCosts: 200,
+          otherExpenditure: 1000,
+        },
+      },
+    },
+
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
+    },
+  },
+
+  {
+    testName:
       "Scenario where lending is given, with a few additional mortgage details provided.",
     providedDetails: {
       mortgageDetails: {
@@ -195,11 +267,31 @@ export const testData: TestEntry[] = [
 
   {
     testName:
+      "Scenario where lending is given, as minimum income to property ratio for lending (0.02) is met.",
+    providedDetails: {
+      mortgageDetails: { propertyValue: 1000000 },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 20000,
+          foreignCurrency: false,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: 1950,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: 1950,
+    },
+  },
+
+  {
+    testName:
       "Scenario where lending is not given, as income is too low compared to property value.",
     providedDetails: {
       mortgageDetails: { propertyValue: 1000000 },
       allIncomeDetails: {
-        applicant1IncomeDetails: { grossIncome: 10000, foreignCurrency: false },
+        applicant1IncomeDetails: { grossIncome: 19000, foreignCurrency: false },
       },
     },
     expectedResult: {
