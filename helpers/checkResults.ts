@@ -49,15 +49,7 @@ export async function checkResults(
     await expect(resultErrorsLocator).toBeHidden();
     await expect(lendingBasedOnPropertyLocator).toBeVisible();
 
-    // TODO: Create helper functions to return numerical values
-    // These values are formatted as strings when displayed on the page and must be converted to numbers for the following comparison.
-    const lendingBasedOnPropertyAsString =
-      await lendingBasedOnPropertyLocator.textContent();
-    const lendingBasedOnPropertyAsInt = Number(lendingBasedOnPropertyAsString);
-
     await expect(resultantLTVLocator).toBeVisible();
-    const resultantLTVAsString = await resultantLTVLocator.textContent();
-    const resultantLTVAsInt = Number(resultantLTVAsString);
 
     // Checks that lending values are greater than 0 if input property value >= MIN_PROPERTY_VALUE.
     if (providedDetails.mortgageDetails?.propertyValue) {
@@ -115,7 +107,10 @@ export async function checkResults(
                 grossIncome / propertyValue <
                 MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING
               ) {
-                await expect(resultantLTVAsInt).toBe(0);
+                // await expect(resultantLTVAsInt).toBe(0);
+                await expect(resultantLTVLocator).toContainText(
+                  resultantLTV.toString()
+                );
               }
 
               // Case where income is great enough compared to property value to allow lending.
