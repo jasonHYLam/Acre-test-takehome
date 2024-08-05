@@ -173,7 +173,7 @@ export const testData: TestEntry[] = [
     providedDetails: {},
     expectedResult: {
       resultErrors: true,
-      lendingBasedOnPropertyValue: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },

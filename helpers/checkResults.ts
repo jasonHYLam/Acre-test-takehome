@@ -30,11 +30,9 @@ export async function checkResults(
 
   const {
     resultErrors,
-    lendingBasedOnPropertyError,
     lendingBasedOnPropertyValue,
     resultantLTV,
     lendingBasedOnAffordabilityValue,
-    lendingBasedOnAffordabilityError,
   } = expectedResult;
 
   const validMortgageDetailsForLending =
@@ -45,7 +43,15 @@ export async function checkResults(
     checkValidIncomeDetailsForLending(providedDetails);
 
   // TODO: check when results should be equal to expected results.
-  // await expect(lendingBasedOnPropertyLocator).toContainText()
+  await expect(lendingBasedOnPropertyLocator).toContainText(
+    lendingBasedOnPropertyValue.toString()
+  );
+
+  await expect(resultantLTVLocator).toContainText(resultantLTV.toString());
+
+  await expect(lendingBasedOnAffordabilityLocator).toContainText(
+    lendingBasedOnAffordabilityValue.toString()
+  );
 
   // // Checks scenarios where minimum criteria for lending are met.
   // if (validIncomeDetailsForLending && validMortgageDetailsForLending) {
