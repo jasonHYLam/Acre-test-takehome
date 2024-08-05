@@ -131,10 +131,14 @@ export async function checkResults(
       // Checks edge cases where property value is less than or equal to 0.
       else if (providedDetails.mortgageDetails.propertyValue <= 0) {
         await expect(resultErrorsLocator).toBeVisible();
-        await expect(lendingBasedOnPropertyLocator).toContainText("0");
-        await expect(resultantLTVLocator).toContainText("0");
+        await expect(lendingBasedOnPropertyLocator).toContainText(
+          lendingBasedOnPropertyValue.toString()
+        );
+        await expect(resultantLTVLocator).toContainText(
+          resultantLTV.toString()
+        );
         await expect(lendingBasedOnAffordabilityLocator).toContainText(
-          "NOT AVAILABLE"
+          lendingBasedOnAffordabilityError
         );
       }
 
