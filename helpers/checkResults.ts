@@ -55,7 +55,7 @@ export async function checkResults(
       await lendingBasedOnPropertyLocator.textContent();
     const lendingBasedOnPropertyAsInt = Number(lendingBasedOnPropertyAsString);
 
-    expect(resultantLTVLocator).toBeVisible();
+    await expect(resultantLTVLocator).toBeVisible();
     const resultantLTVAsString = await resultantLTVLocator.textContent();
     const resultantLTVAsInt = Number(resultantLTVAsString);
 
@@ -115,13 +115,17 @@ export async function checkResults(
                 grossIncome / propertyValue <
                 MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING
               ) {
-                expect(resultantLTVAsInt).toBe(0);
+                await expect(resultantLTVAsInt).toBe(0);
               }
 
               // Case where income is great enough compared to property value to allow lending.
               else {
-                expect(resultantLTVAsInt).toBeGreaterThan(0);
-                expect(lendingBasedOnPropertyAsInt).toBeGreaterThan(0);
+                await expect(resultantLTVLocator).toContainText(
+                  resultantLTV.toString()
+                );
+                await expect(lendingBasedOnPropertyLocator).toContainText(
+                  lendingBasedOnPropertyValue.toString()
+                );
               }
             }
           }
