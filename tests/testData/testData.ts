@@ -62,9 +62,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyValue: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
@@ -86,9 +86,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyValue: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
@@ -105,7 +105,7 @@ export const testData: TestEntry[] = [
       resultErrors: true,
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
@@ -124,7 +124,7 @@ export const testData: TestEntry[] = [
       resultErrors: true,
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
@@ -144,7 +144,7 @@ export const testData: TestEntry[] = [
       resultErrors: true,
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
@@ -162,9 +162,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyValue: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
@@ -175,7 +175,7 @@ export const testData: TestEntry[] = [
       resultErrors: true,
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 ];
