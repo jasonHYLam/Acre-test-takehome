@@ -19,10 +19,8 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 185950,
       resultantLTV: 19,
-      lendingBasedOnAffordabilityError: "",
       lendingBasedOnAffordabilityValue: 185950,
     },
   },
@@ -46,10 +44,8 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 185950,
       resultantLTV: 19,
-      lendingBasedOnAffordabilityError: "",
       lendingBasedOnAffordabilityValue: 185950,
     },
   },
@@ -66,11 +62,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyError: "NOT AVAILABLE",
-      lendingBasedOnPropertyValue: 0,
+      lendingBasedOnPropertyValue: "NOT AVAILABLE",
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 
@@ -92,11 +86,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyError: "NOT AVAILABLE",
-      lendingBasedOnPropertyValue: 0,
+      lendingBasedOnPropertyValue: "NOT AVAILABLE",
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 
@@ -111,11 +103,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: true,
-      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 
@@ -132,11 +122,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: true,
-      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 
@@ -154,11 +142,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: true,
-      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 
@@ -176,11 +162,9 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyError: "NOT AVAILABLE",
-      lendingBasedOnPropertyValue: 0,
+      lendingBasedOnPropertyValue: "NOT AVAILABLE",
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 
@@ -189,11 +173,9 @@ export const testData: TestEntry[] = [
     providedDetails: {},
     expectedResult: {
       resultErrors: true,
-      lendingBasedOnPropertyError: "NOT AVAILABLE",
-      lendingBasedOnPropertyValue: 0,
+      lendingBasedOnPropertyValue: "NOT AVAILABLE",
       resultantLTV: 0,
-      lendingBasedOnAffordabilityError: "NOT AVAILABLE",
-      lendingBasedOnAffordabilityValue: 0,
+      lendingBasedOnAffordabilityValue: "NOT AVAILABLE",
     },
   },
 ];
