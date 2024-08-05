@@ -1,7 +1,7 @@
 // @ts-check
 
 import { expect, Page } from "@playwright/test";
-import { ExpectedResult } from "./types";
+import { ExpectedResult, ProvidedDetails } from "./types";
 import {
   MIN_PROPERTY_VALUE,
   MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING,
@@ -30,6 +30,12 @@ export async function checkResults(page: Page, expectedResult: ExpectedResult) {
     resultantLTV,
     lendingBasedOnAffordabilityValue,
   } = expectedResult;
+
+  if (resultErrors) {
+    await expect(resultErrorsLocator).toBeVisible();
+  } else {
+    await expect(resultErrorsLocator).toBeHidden();
+  }
 
   await expect(lendingBasedOnPropertyLocator).toContainText(
     lendingBasedOnPropertyValue.toString()

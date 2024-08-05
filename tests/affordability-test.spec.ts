@@ -34,6 +34,6 @@ testData.forEach((testEntry) => {
       }
     }
 
-    await checkResults(page, providedDetails, expectedResult);
+    await checkResults(page, expectedResult);
   });
 });
