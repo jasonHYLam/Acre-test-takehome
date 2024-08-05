@@ -4,7 +4,6 @@ export interface TestEntry {
   expectedResult: ExpectedResult;
 }
 
-// TODO: Change this to remove testName and expectedResult
 export interface ProvidedDetails {
   mortgageDetails?: MortgageDetails;
   allIncomeDetails?: AllIncomeDetails;
@@ -89,7 +88,9 @@ type ForeignCurrency = false | 0.1 | 0.2 | 0.3;
 
 export interface ExpectedResult {
   resultErrors: boolean;
-  lendingBasedOnProperty: string | number;
+  lendingBasedOnPropertyError?: string;
+  lendingBasedOnPropertyValue?: number;
   resultantLTV: number;
-  lendingBasedOnAffordability: string | number;
+  lendingBasedOnAffordabilityError?: string;
+  lendingBasedOnAffordabilityValue?: number;
 }

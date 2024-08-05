@@ -14,7 +14,6 @@ import {
   calculateTotalIncome,
 } from "./utils";
 
-// TODO: Add expectedResults to argument list
 export async function checkResults(
   page: Page,
   providedDetails: ProvidedDetails,
@@ -28,6 +27,13 @@ export async function checkResults(
   const lendingBasedOnAffordabilityLocator = page.locator(
     "#lendingBasedOnAffordability"
   );
+
+  const {
+    resultErrors,
+    lendingBasedOnProperty,
+    resultantLTV,
+    lendingBasedOnAffordability,
+  } = expectedResult;
 
   const validMortgageDetailsForLending =
     checkValidMortgageDetailsForLending(providedDetails);
