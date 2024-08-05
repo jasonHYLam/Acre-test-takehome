@@ -18,8 +18,10 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
+      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 185950,
       resultantLTV: 19,
+      lendingBasedOnAffordabilityError: "",
       lendingBasedOnAffordabilityValue: 185950,
     },
   },
@@ -43,8 +45,10 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
+      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 185950,
       resultantLTV: 19,
+      lendingBasedOnAffordabilityError: "",
       lendingBasedOnAffordabilityValue: 185950,
     },
   },
@@ -62,8 +66,10 @@ export const testData: TestEntry[] = [
     expectedResult: {
       resultErrors: false,
       lendingBasedOnPropertyError: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 
@@ -86,8 +92,10 @@ export const testData: TestEntry[] = [
     expectedResult: {
       resultErrors: false,
       lendingBasedOnPropertyError: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 
@@ -102,9 +110,11 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: true,
+      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 
@@ -121,9 +131,11 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: true,
+      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 
@@ -141,9 +153,11 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: true,
+      lendingBasedOnPropertyError: "",
       lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 
@@ -162,8 +176,10 @@ export const testData: TestEntry[] = [
     expectedResult: {
       resultErrors: false,
       lendingBasedOnPropertyError: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 
@@ -173,8 +189,10 @@ export const testData: TestEntry[] = [
     expectedResult: {
       resultErrors: true,
       lendingBasedOnPropertyError: "NOT AVAILABLE",
+      lendingBasedOnPropertyValue: 0,
       resultantLTV: 0,
       lendingBasedOnAffordabilityError: "NOT AVAILABLE",
+      lendingBasedOnAffordabilityValue: 0,
     },
   },
 ];

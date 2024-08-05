@@ -30,9 +30,11 @@ export async function checkResults(
 
   const {
     resultErrors,
-    lendingBasedOnProperty,
+    lendingBasedOnPropertyError,
+    lendingBasedOnPropertyValue,
     resultantLTV,
-    lendingBasedOnAffordability,
+    lendingBasedOnAffordabilityValue,
+    lendingBasedOnAffordabilityError,
   } = expectedResult;
 
   const validMortgageDetailsForLending =
@@ -151,13 +153,15 @@ export async function checkResults(
 
   // Checks scenarios where minimum criteria for lending are NOT met.
   else {
-    // If valid details are not provided, expect errors to be displayed.
-    // TODO: Handle expectedResults!
-    await expect(resultErrorsLocator).toBeVisible();
-    await expect(lendingBasedOnPropertyLocator).toContainText("0");
-    await expect(resultantLTVLocator).toContainText("0");
-    await expect(lendingBasedOnAffordabilityLocator).toContainText(
-      "NOT AVAILABLE"
-    );
+    if (lendingBasedOnAffordabilityError) {
+      // If valid details are not provided, expect errors to be displayed.
+      // TODO: Handle expectedResults!
+      await expect(resultErrorsLocator).toBeVisible();
+      await expect(lendingBasedOnPropertyLocator).toContainText("0");
+      await expect(resultantLTVLocator).toContainText("0");
+      await expect(lendingBasedOnAffordabilityLocator).toContainText(
+        lendingBasedOnAffordabilityError
+      );
+    }
   }
 }

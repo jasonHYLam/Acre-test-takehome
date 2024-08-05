@@ -88,9 +88,9 @@ type ForeignCurrency = false | 0.1 | 0.2 | 0.3;
 
 export interface ExpectedResult {
   resultErrors: boolean;
-  lendingBasedOnPropertyError?: string;
-  lendingBasedOnPropertyValue?: number;
+  lendingBasedOnPropertyError: string;
+  lendingBasedOnPropertyValue: number;
   resultantLTV: number;
-  lendingBasedOnAffordabilityError?: string;
-  lendingBasedOnAffordabilityValue?: number;
+  lendingBasedOnAffordabilityError: string;
+  lendingBasedOnAffordabilityValue: number;
 }
