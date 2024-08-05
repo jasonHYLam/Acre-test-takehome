@@ -44,8 +44,8 @@ To create scenarios, I interacted with the calculator with different combination
 
 - minimum property value: 50000
 - minimum income value: 10000 (if property value is 50000)
-- minimum income to property ratio: 0.02
-- maximum expenditure to income ratio: 0.48
+- minimum income to property ratio (estimated): 0.02
+- maximum expenditure to income ratio (estimated): 0.48
 
 I have used these thresholds to create some scenarios for the test.
 
