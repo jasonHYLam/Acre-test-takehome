@@ -153,15 +153,15 @@ export async function checkResults(
 
   // Checks scenarios where minimum criteria for lending are NOT met.
   else {
-    if (lendingBasedOnAffordabilityError) {
-      // If valid details are not provided, expect errors to be displayed.
-      // TODO: Handle expectedResults!
-      await expect(resultErrorsLocator).toBeVisible();
-      await expect(lendingBasedOnPropertyLocator).toContainText("0");
-      await expect(resultantLTVLocator).toContainText("0");
-      await expect(lendingBasedOnAffordabilityLocator).toContainText(
-        lendingBasedOnAffordabilityError
-      );
-    }
+    // If valid details are not provided, expect errors to be displayed.
+    // TODO: Handle expectedResults!
+    await expect(resultErrorsLocator).toBeVisible();
+    await expect(lendingBasedOnPropertyLocator).toContainText(
+      lendingBasedOnPropertyValue.toString()
+    );
+    await expect(resultantLTVLocator).toContainText(resultantLTV.toString());
+    await expect(lendingBasedOnAffordabilityLocator).toContainText(
+      lendingBasedOnAffordabilityError
+    );
   }
 }
