@@ -1,6 +1,7 @@
 import { TestEntry } from "../../helpers/types";
 // Input data is an array containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 
+import { NO_LENDING_MESSAGE } from "../../helpers/constants";
 // TODO: Consider average user; 30-40 years old, etc.
 
 export const testData: TestEntry[] = [
