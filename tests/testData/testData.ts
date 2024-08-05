@@ -236,6 +236,27 @@ export const testData: TestEntry[] = [
 
   {
     testName:
+      "Scenario when lending is not given, when total income exceeds minimum required for lending but gross income is low.",
+    providedDetails: {
+      mortgageDetails: { propertyValue: 50000 },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 5000,
+          foreignCurrency: false,
+          additionalIncome: 5000,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
+    },
+  },
+
+  {
+    testName:
       "Scenario where lending is not given, as foreignCurrency is not provided.",
     providedDetails: {
       mortgageDetails: { propertyValue: 1000000 },
@@ -246,6 +267,26 @@ export const testData: TestEntry[] = [
     expectedResult: {
       resultErrors: true,
       lendingBasedOnPropertyValue: 0,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
+    },
+  },
+
+  {
+    testName:
+      "Scenario where lending is not given, as propertyValue is below minimum property value (50000).",
+    providedDetails: {
+      mortgageDetails: { propertyValue: 45000 },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 100000,
+          foreignCurrency: false,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
       resultantLTV: 0,
       lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
@@ -292,26 +333,7 @@ export const testData: TestEntry[] = [
 
   {
     testName:
-      "Scenario where lending is not given, as propertyValue is below minimum property value.",
-    providedDetails: {
-      mortgageDetails: { propertyValue: 1 },
-      allIncomeDetails: {
-        applicant1IncomeDetails: {
-          grossIncome: 100000,
-          foreignCurrency: false,
-        },
-      },
-    },
-    expectedResult: {
-      resultErrors: false,
-      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
-      resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
-    },
-  },
-
-  {
-    testName: "Scenario where no details are provided.",
+      "Scenario where lending is not given, as no details are provided.",
     providedDetails: {},
     expectedResult: {
       resultErrors: true,
