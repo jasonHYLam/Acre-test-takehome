@@ -7,27 +7,7 @@ import { NO_LENDING_MESSAGE } from "../../helpers/constants";
 export const testData: TestEntry[] = [
   {
     testName:
-      "Scenario where lending is given, as minimum details (property value, gross income, foreign currency) for lending are given.",
-    providedDetails: {
-      mortgageDetails: { propertyValue: 1000000 },
-      allIncomeDetails: {
-        applicant1IncomeDetails: {
-          grossIncome: 100000,
-          foreignCurrency: false,
-        },
-      },
-    },
-    expectedResult: {
-      resultErrors: false,
-      lendingBasedOnPropertyValue: 185950,
-      resultantLTV: 19,
-      lendingBasedOnAffordabilityValue: 185950,
-    },
-  },
-
-  {
-    testName:
-      "Scenario where lending is given, with all possible details provided.",
+      "Scenario where lending is given for joint mortgage, with all possible details provided.",
     providedDetails: {
       mortgageDetails: {
         purchaserType: "Buying first house - moving",
@@ -98,6 +78,26 @@ export const testData: TestEntry[] = [
 
   {
     testName:
+      "Scenario where lending is given, as minimum details (property value, gross income, foreign currency) for lending are given and are greater than minimum values.",
+    providedDetails: {
+      mortgageDetails: { propertyValue: 1000000 },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 100000,
+          foreignCurrency: false,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: 185950,
+      resultantLTV: 19,
+      lendingBasedOnAffordabilityValue: 185950,
+    },
+  },
+
+  {
+    testName:
       "Scenario where lending is not given for joint mortgage, as expenditure is too great.",
     providedDetails: {
       mortgageDetails: {
@@ -137,6 +137,7 @@ export const testData: TestEntry[] = [
           existingBTLRentalIncome: 20000,
         },
       },
+
       allExpenditureDetails: {
         applicant1ExpenditureDetails: {
           monthlyBTLOutgoings: 10000,
@@ -169,7 +170,7 @@ export const testData: TestEntry[] = [
 
   {
     testName:
-      "Scenario where lending is given, with additional mortgage details provided.",
+      "Scenario where lending is given, with a few additional mortgage details provided.",
     providedDetails: {
       mortgageDetails: {
         propertyValue: 1000000,
@@ -195,7 +196,6 @@ export const testData: TestEntry[] = [
   {
     testName:
       "Scenario where lending is not given, as income is too low compared to property value.",
-
     providedDetails: {
       mortgageDetails: { propertyValue: 1000000 },
       allIncomeDetails: {

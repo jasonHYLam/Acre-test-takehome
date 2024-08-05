@@ -40,6 +40,15 @@ The assignment mentions that the different scenarios can be easily extended. The
 
 ## Comments
 
+To create scenarios, I interacted with the calculator with different combinations of inputs. From this, I have observed that there are approximate threshold values/ratios required for certain inputs for lending to occur. These include:
+
+- minimum property value: 50000
+- minimum income value: 10000 (if property value is 50000)
+- minimum income to property ratio: 0.02
+- maximum expenditure to income ratio: 0.48
+
+I have used these thresholds to create some scenarios for the test.
+
 I have separated concerns by putting constants, types, and util helper functions in their respective files and importing them where necessary.
 
 As the test file grew, I split up the test file into separate modules with single responsibilities to make the test file easier to read. These modules are `handleMortgageDetails`, `handleIncomeDetails`, `handleExpenditureDetails` and `checkResults`.
