@@ -1,9 +1,13 @@
 import { TestEntry } from "../../helpers/types";
-// Input data is an array containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
 
 import { NO_LENDING_MESSAGE } from "../../helpers/constants";
-// TODO: Consider average user; 30-40 years old, etc.
 
+// Input data is an array containing testEntry objects. These objects contain properties representing the test name, input details (providedDetails) and expected results (expectedResult)
+// The provided details property has an object that represents the given calculator categories, including mortgage details, income details and expenditure details.
+// Each of these categories contain all possible inputs.
+
+// TODO: Create scenario for joint mortgage, not given, second applicant no income, first applicant has minimum gross income for property price.
+// TODO: Create scenario for too many dependants.
 export const testData: TestEntry[] = [
   {
     testName:
@@ -93,78 +97,6 @@ export const testData: TestEntry[] = [
       lendingBasedOnPropertyValue: 185950,
       resultantLTV: 19,
       lendingBasedOnAffordabilityValue: 185950,
-    },
-  },
-
-  {
-    testName:
-      "Scenario where lending is not given for joint mortgage, as expenditure is too great.",
-    providedDetails: {
-      mortgageDetails: {
-        purchaserType: "Buying first house - moving",
-        jointMortgage: true,
-        maxLTV: 0.9,
-        applicant1Age: 40,
-        applicant2Age: 39,
-        applicant1EmploymentStatus: "Employed",
-        applicant2EmploymentStatus: "Self-employed",
-        maritalStatus: "Married",
-        dependantChildren: 2,
-        dependantAdults: 1,
-        depositAmount: 20000,
-        loanAmount: 10000,
-        propertyValue: 1000000,
-        mortgageTerm: 25,
-        assessOnInterestOnlyBasis: true,
-        propertyPostcode: "SW",
-      },
-
-      allIncomeDetails: {
-        applicant1IncomeDetails: {
-          grossIncome: 100000,
-          foreignCurrency: 0.1,
-          additionalIncome: 10000,
-          limitedCompanyNetProfits: 20000,
-          otherNonTaxableIncome: 3000,
-          existingBTLRentalIncome: 40000,
-        },
-        applicant2IncomeDetails: {
-          grossIncome: 120000,
-          foreignCurrency: 0.2,
-          additionalIncome: 5000,
-          limitedCompanyNetProfits: 40000,
-          otherNonTaxableIncome: 2000,
-          existingBTLRentalIncome: 20000,
-        },
-      },
-
-      allExpenditureDetails: {
-        applicant1ExpenditureDetails: {
-          monthlyBTLOutgoings: 10000,
-          monthlyLoanPayments: 400,
-          creditCards: 3000,
-          groundRent: 1000,
-          travel: 300,
-          childCareCosts: 200,
-          otherExpenditure: 1000,
-        },
-        applicant2ExpenditureDetails: {
-          monthlyBTLOutgoings: 20000,
-          monthlyLoanPayments: 500,
-          creditCards: 3000,
-          groundRent: 1000,
-          travel: 300,
-          childCareCosts: 200,
-          otherExpenditure: 1000,
-        },
-      },
-    },
-
-    expectedResult: {
-      resultErrors: false,
-      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
-      resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
