@@ -2,11 +2,11 @@
 
 Takehome assignment for Acre test role.
 
-## Assumptions and Comments
-
-I have used the Playwright library for its ease of end-to-end testing, and wrote the tests specifically for the HSBC affordability residential calculator.
+## Overview
 
 I have written a table-driven test that handles multiple scenarios as directed by the assignment brief. The table-driven test approach uses a collection of test entries and loops through it to perform the same test for each loop iteration. These test entries contain input data, expected results and test names. To handle different scenarios, there are many if statements within the test to create different branches of execution.
+
+I have used the [Playwright library](https://playwright.dev/) for its ease of end-to-end testing, and wrote the tests specifically for the [HSBC affordability residential calculator](https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php).
 
 I have used the Page Object model to perform actions on various parts of the page such as clicking buttons and filling inputs, and obtaining values from the page (using locators) to compare to the expected results for assertions.
 
@@ -25,7 +25,20 @@ The input data is provided in the `inputData.ts` file. I believe this would suff
 
 The input data can take all possible input from the HSBC affordability residential calculator form. Types are introduced to ensure that the structure of the data is consistent. Additionally, the use of union types ensure that certain input is restricted to expected values, which is useful for select input types such as Marital Status, Maximum LTV etc.
 
-I have observed that several of the inputs do not seem to affect the lending calculation, such as postcode and marital status. I have nonetheless included them in the allowed range of input as well as handling input actions. I could have tested these inputs by checking the "Printer Friendly Version" and verifying that the those values are present, but I assumed the test only needed to focus on whether lending would be given or not.
+## Assumptions
+
+I have assumed that the test only needed to verify whether lending would be given or not. I have observed that several of the inputs do not seem to affect the lending calculation, such as postcode and marital status. I have nonetheless included them in the allowed range of input as well as handling input actions. If necessary, I could have tested these inputs by checking the "Printer Friendly Version" results and verifying that corresponding values are present.
+
+I have assumed that for the purpose of this assignment, the data setup was not too important, thus I used a simple input file rather than a database.
+
+I have assumed that this test only needs to focus on one calculator rather than multiple calculators.
+
+The assignment mentions that the different scenarios can be easily extended. There are multiple ways this can be interpreted:
+
+- being able to easily add to the input in order to create different scenarios. I have considered this by structuring the input data to take all valid inputs for the HSBC calculator, with valid types.
+- if new inputs are added to the calculator, then being able to easily add to the test to handle these. I have considered this by adding helper functions to reduce boilerplate code, and separating different sections of the calculator form into different modules.
+
+## Comments
 
 I have separated concerns by putting constants, types, and util helper functions in their respective files and importing them where necessary.
 
