@@ -27,6 +27,77 @@ export const testData: TestEntry[] = [
 
   {
     testName:
+      "Scenario where lending is given, with all possible details provided.",
+    providedDetails: {
+      mortgageDetails: {
+        purchaserType: "Buying first house - moving",
+        jointMortgage: true,
+        maxLTV: 0.9,
+        applicant1Age: 40,
+        applicant2Age: 39,
+        applicant1EmploymentStatus: "Employed",
+        applicant2EmploymentStatus: "Self-employed",
+        maritalStatus: "Married",
+        dependantChildren: 2,
+        dependantAdults: 1,
+        depositAmount: 20000,
+        loanAmount: 10000,
+        propertyValue: 1000000,
+        mortgageTerm: 25,
+        assessOnInterestOnlyBasis: true,
+        propertyPostcode: "SW",
+      },
+
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 1000000,
+          foreignCurrency: 0.1,
+          additionalIncome: 10000,
+          limitedCompanyNetProfits: 20000,
+          otherNonTaxableIncome: 3000,
+          existingBTLRentalIncome: 40000,
+        },
+        applicant2IncomeDetails: {
+          grossIncome: 1200000,
+          foreignCurrency: 0.2,
+          additionalIncome: 5000,
+          limitedCompanyNetProfits: 40000,
+          otherNonTaxableIncome: 2000,
+          existingBTLRentalIncome: 20000,
+        },
+      },
+      allExpenditureDetails: {
+        applicant1ExpenditureDetails: {
+          monthlyBTLOutgoings: 1000,
+          monthlyLoanPayments: 400,
+          creditCards: 3000,
+          groundRent: 1000,
+          travel: 300,
+          childCareCosts: 200,
+          otherExpenditure: 1000,
+        },
+        applicant2ExpenditureDetails: {
+          monthlyBTLOutgoings: 2000,
+          monthlyLoanPayments: 500,
+          creditCards: 3000,
+          groundRent: 1000,
+          travel: 300,
+          childCareCosts: 200,
+          otherExpenditure: 1000,
+        },
+      },
+    },
+
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: 232950,
+      resultantLTV: 23,
+      lendingBasedOnAffordabilityValue: 232950,
+    },
+  },
+
+  {
+    testName:
       "Scenario where lending is given, with additional mortgage details provided.",
     providedDetails: {
       mortgageDetails: {

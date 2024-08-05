@@ -35,25 +35,14 @@ async function handleIncomeDetailsForOneApplicant(
   }
 
   if (foreignCurrency || foreignCurrency === false) {
-    await page.getByRole("button", { name: "Nothing selected" }).click();
     if (foreignCurrency === false) {
-      await page
-        .getByRole("menu")
-        .locator("a")
-        .filter({ hasText: "No" })
-        .click();
+      await page.selectOption(`#a${applicantNumber}haircutPercentage`, "no");
     } else if (foreignCurrency === 0.1) {
-      await page
-        .getByRole("button", { name: "Yes - 10% Haircut to be" })
-        .click();
+      await page.selectOption(`#a${applicantNumber}haircutPercentage`, "10");
     } else if (foreignCurrency === 0.2) {
-      await page
-        .getByRole("button", { name: "Yes - 20% Haircut to be" })
-        .click();
+      await page.selectOption(`#a${applicantNumber}haircutPercentage`, "20");
     } else {
-      await page
-        .getByRole("button", { name: "Yes - 30% Haircut to be" })
-        .click();
+      await page.selectOption(`#a${applicantNumber}haircutPercentage`, "30");
     }
   }
 
