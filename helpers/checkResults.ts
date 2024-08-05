@@ -141,11 +141,13 @@ export async function checkResults(
       // Checks all other cases where property value is between 0 and minimum value for lending.
       else {
         await expect(lendingBasedOnPropertyLocator).toContainText(
-          "NOT AVAILABLE"
+          lendingBasedOnPropertyError
         );
-        await expect(resultantLTVLocator).toContainText("0");
+        await expect(resultantLTVLocator).toContainText(
+          resultantLTV.toString()
+        );
         await expect(lendingBasedOnAffordabilityLocator).toContainText(
-          "NOT AVAILABLE"
+          lendingBasedOnAffordabilityError
         );
       }
     }
