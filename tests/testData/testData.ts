@@ -50,7 +50,7 @@ export const testData: TestEntry[] = [
 
       allIncomeDetails: {
         applicant1IncomeDetails: {
-          grossIncome: 1000000,
+          grossIncome: 100000,
           foreignCurrency: 0.1,
           additionalIncome: 10000,
           limitedCompanyNetProfits: 20000,
@@ -58,7 +58,7 @@ export const testData: TestEntry[] = [
           existingBTLRentalIncome: 40000,
         },
         applicant2IncomeDetails: {
-          grossIncome: 1200000,
+          grossIncome: 120000,
           foreignCurrency: 0.2,
           additionalIncome: 5000,
           limitedCompanyNetProfits: 40000,
