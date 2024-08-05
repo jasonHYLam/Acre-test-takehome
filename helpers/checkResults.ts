@@ -1,18 +1,7 @@
 // @ts-check
 
 import { expect, Page } from "@playwright/test";
-import { ExpectedResult, ProvidedDetails } from "./types";
-import {
-  MIN_PROPERTY_VALUE,
-  MIN_INCOME_TO_PROPERTY_RATIO_FOR_LENDING,
-  MAX_EXPENDITURE_TO_INCOME_RATIO_FOR_LENDING,
-} from "./constants";
-import {
-  checkValidMortgageDetailsForLending,
-  checkValidIncomeDetailsForLending,
-  calculateTotalExpenditure,
-  calculateTotalIncome,
-} from "./utils";
+import { ExpectedResult } from "./types";
 
 export async function checkResults(page: Page, expectedResult: ExpectedResult) {
   await page.getByText("view", { exact: true }).click();
