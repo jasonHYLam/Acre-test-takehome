@@ -29,7 +29,7 @@ The input data can take all possible input from the HSBC affordability residenti
 
 I have assumed that the test only needed to verify whether lending would be given or not. I have observed that several of the inputs do not seem to affect the lending calculation, such as postcode and marital status. I have nonetheless included them in the allowed range of input as well as handling input actions. If necessary, I could have tested these inputs by checking the "Printer Friendly Version" results and verifying that corresponding values are present.
 
-I have assumed that for the purpose of this assignment, the data setup was not too important, thus I used a simple input file rather than a database.
+I have assumed that for the purpose of this assignment, the data setup was not too important, thus I used a simple `testData` file containing the input data rather than a database.
 
 I have assumed that this test only needs to focus on one calculator rather than multiple calculators.
 
@@ -44,7 +44,9 @@ I have separated concerns by putting constants, types, and util helper functions
 
 As the test file grew, I split up the test file into separate modules with single responsibilities to make the test file easier to read. These modules are `handleMortgageDetails`, `handleIncomeDetails`, `handleExpenditureDetails` and `checkResults`.
 
-I have created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I later found out that this may not be necessary, but have kept it to show how I reduce boilerplate code. I have given descriptive and meaningful names for each.
+I have created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I later found out that this may not be necessary, but have kept it to show how I would approach reducing boilerplate code. I have given descriptive and meaningful names for each.
+
+My original approach did not use `expectedResult` and thus required general expected results, such as if `lendingBasedOnAffordability` was greater than 0 or was `NOT AVAILABLE`. This required nested conditional statements which were very hard to follow. These conditional statements required a number of helper functions such as `checkValidMortgageDetailsForLending`, to help determine when these scenarios would occur. Introducing `expectedResult` to each `testEntry` meant that the test result could be compared to the `expectedResult`. This removed the need for the nested conditional statements, which drastically simplified the code.
 
 I have separated the major aspects of the test into separate modules that handle one responsibility. These modules are `handleMortgageDetails`, `handleIncomeDetails`, `handleExpenditureDetails` and `checkResults`.
 
