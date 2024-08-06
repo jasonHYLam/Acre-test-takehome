@@ -82,6 +82,30 @@ export const testData: TestEntry[] = [
 
   {
     testName:
+      "Scenario where lending is not given, as there are too many dependants for the given income.",
+    providedDetails: {
+      mortgageDetails: {
+        propertyValue: 1000000,
+        dependantChildren: 5,
+        dependantAdults: 5,
+      },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 20000,
+          foreignCurrency: false,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
+    },
+  },
+
+  {
+    testName:
       "Scenario where lending is given, as minimum details (property value, gross income, foreign currency) for lending are given and are greater than minimum values.",
     providedDetails: {
       mortgageDetails: { propertyValue: 1000000 },
