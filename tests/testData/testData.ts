@@ -6,8 +6,6 @@ import { NO_LENDING_MESSAGE } from "../../helpers/constants";
 // The provided details property has an object that represents the given calculator categories, including mortgage details, income details and expenditure details.
 // Each of these categories contain all possible inputs.
 
-// TODO: Create scenario for joint mortgage, not given, second applicant no income, first applicant has minimum gross income for property price.
-// TODO: Create scenario for too many dependants.
 export const testData: TestEntry[] = [
   {
     testName:
@@ -218,6 +216,33 @@ export const testData: TestEntry[] = [
       lendingBasedOnPropertyValue: 185950,
       resultantLTV: 19,
       lendingBasedOnAffordabilityValue: 185950,
+    },
+  },
+
+  {
+    testName:
+      "Scenario where lending is not given for joint mortgage, as combined income is not enough.",
+    providedDetails: {
+      mortgageDetails: {
+        propertyValue: 1000000,
+        jointMortgage: true,
+      },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 20000,
+          foreignCurrency: false,
+        },
+        applicant2IncomeDetails: {
+          grossIncome: 0,
+          foreignCurrency: false,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
