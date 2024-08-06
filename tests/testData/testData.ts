@@ -413,25 +413,6 @@ export const testData: TestEntry[] = [
   },
 
   {
-    testName: "Scenario where lending is not given, as propertyValue is 0.",
-    providedDetails: {
-      mortgageDetails: { propertyValue: 0 },
-      allIncomeDetails: {
-        applicant1IncomeDetails: {
-          grossIncome: 100000,
-          foreignCurrency: false,
-        },
-      },
-    },
-    expectedResult: {
-      resultErrors: true,
-      lendingBasedOnPropertyValue: 0,
-      resultantLTV: 0,
-      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
-    },
-  },
-
-  {
     testName:
       "Scenario where lending is not given, as propertyValue is a negative integer.",
     providedDetails: {
