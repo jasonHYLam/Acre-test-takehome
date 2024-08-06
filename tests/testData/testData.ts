@@ -196,13 +196,14 @@ export const testData: TestEntry[] = [
 
   {
     testName:
-      "Scenario where lending is given, with a few additional mortgage details provided.",
+      "Scenario where lending is given, with positive lending multipliers applied (max LTV, mortgage term, assess on interest only basis).",
     providedDetails: {
       mortgageDetails: {
         propertyValue: 1000000,
         jointMortgage: false,
-        maxLTV: 0.85,
-        mortgageTerm: 5,
+        maxLTV: 0.95,
+        mortgageTerm: 25,
+        assessOnInterestOnlyBasis: true,
       },
       allIncomeDetails: {
         applicant1IncomeDetails: {
@@ -213,9 +214,35 @@ export const testData: TestEntry[] = [
     },
     expectedResult: {
       resultErrors: false,
-      lendingBasedOnPropertyValue: 185950,
-      resultantLTV: 19,
-      lendingBasedOnAffordabilityValue: 185950,
+      lendingBasedOnPropertyValue: 449000,
+      resultantLTV: 45,
+      lendingBasedOnAffordabilityValue: 449000,
+    },
+  },
+
+  {
+    testName:
+      "Scenario where lending is not given, with positive lending multipliers applied to income that is less than the minimum required for lending.",
+    providedDetails: {
+      mortgageDetails: {
+        propertyValue: 1000000,
+        jointMortgage: false,
+        maxLTV: 0.95,
+        mortgageTerm: 25,
+        assessOnInterestOnlyBasis: true,
+      },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 19000,
+          foreignCurrency: false,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 

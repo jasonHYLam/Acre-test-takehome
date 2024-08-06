@@ -7,7 +7,17 @@ import {
   AllExpenditureDetails,
 } from "./types";
 
-// TODO: May not be needed
+// Handles clicking on an numerical input, filling in the value, and pressing enter.
+export async function clickAndEnterNumericalInput(
+  locator: Locator,
+  value: number
+) {
+  await locator.click();
+  await locator.fill(value.toString());
+  await locator.press("Enter");
+}
+
+// The following helper functions are deprecated.
 // Checks if valid mortgage details (property value) is present.
 export function checkValidMortgageDetailsForLending(
   providedDetails: ProvidedDetails
@@ -18,7 +28,6 @@ export function checkValidMortgageDetailsForLending(
   return false;
 }
 
-// TODO: May not be needed
 // Checks if valid income details (gross income and foreignCurrency) are present; handles sole and joint mortgage cases.
 export function checkValidIncomeDetailsForLending(
   providedDetails: ProvidedDetails
@@ -45,7 +54,6 @@ export function checkValidIncomeDetailsForLending(
   return false;
 }
 
-// TODO: May not be needed
 function checkValidIncomeDetailsForLendingForSoleMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
@@ -58,7 +66,6 @@ function checkValidIncomeDetailsForLendingForSoleMortgage(
   );
 }
 
-// TODO: May not be needed
 function checkValidIncomeDetailsForLendingForJointMortgage(
   allIncomeDetails: AllIncomeDetails
 ) {
@@ -74,7 +81,6 @@ function checkValidIncomeDetailsForLendingForJointMortgage(
   );
 }
 
-// TODO: May not be needed
 // Calculates total income, used for checking lending. Handles single or double applicant scenarios.
 export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
   let totalIncome = 0;
@@ -92,7 +98,6 @@ export function calculateTotalIncome(allIncomeDetails: AllIncomeDetails) {
   return totalIncome;
 }
 
-// TODO: May not be needed
 function calculateIncomeForApplicant(incomeDetails: IncomeDetails) {
   let totalIncomeForApplicant = 0;
   totalIncomeForApplicant +
@@ -105,7 +110,6 @@ function calculateIncomeForApplicant(incomeDetails: IncomeDetails) {
   return totalIncomeForApplicant;
 }
 
-// TODO: May not be needed
 // Calculates total expenditure, used for checking lending. Handles single or double applicant scenarios.
 export function calculateTotalExpenditure(
   allExpenditureDetails: AllExpenditureDetails
@@ -125,7 +129,6 @@ export function calculateTotalExpenditure(
   return totalExpenditure;
 }
 
-// TODO: May not be needed
 function calculateExpenditureForApplicant(
   expenditureDetails: ExpenditureDetails
 ) {
@@ -140,14 +143,4 @@ function calculateExpenditureForApplicant(
     (expenditureDetails.otherExpenditure ?? 0);
 
   return totalExpenditureForApplicant;
-}
-
-// Handles clicking on an numerical input, filling in the value, and pressing enter.
-export async function clickAndEnterNumericalInput(
-  locator: Locator,
-  value: number
-) {
-  await locator.click();
-  await locator.fill(value.toString());
-  await locator.press("Enter");
 }
