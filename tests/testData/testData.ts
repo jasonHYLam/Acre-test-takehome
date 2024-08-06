@@ -248,7 +248,7 @@ export const testData: TestEntry[] = [
 
   {
     testName:
-      "Scenario where lending is given, as minimum income to property ratio for lending (0.02) is met.",
+      "Scenario where lending is not given, as minimum income to property ratio for lending (0.02) is met.",
     providedDetails: {
       mortgageDetails: { propertyValue: 1000000 },
       allIncomeDetails: {
@@ -263,6 +263,26 @@ export const testData: TestEntry[] = [
       lendingBasedOnPropertyValue: 1950,
       resultantLTV: 0,
       lendingBasedOnAffordabilityValue: 1950,
+    },
+  },
+
+  {
+    testName:
+      "Scenario where lending is not given, as element of foreign currency is applied to minimum income.",
+    providedDetails: {
+      mortgageDetails: { propertyValue: 1000000 },
+      allIncomeDetails: {
+        applicant1IncomeDetails: {
+          grossIncome: 20000,
+          foreignCurrency: 0.3,
+        },
+      },
+    },
+    expectedResult: {
+      resultErrors: false,
+      lendingBasedOnPropertyValue: NO_LENDING_MESSAGE,
+      resultantLTV: 0,
+      lendingBasedOnAffordabilityValue: NO_LENDING_MESSAGE,
     },
   },
 
