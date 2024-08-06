@@ -33,9 +33,11 @@ The input data can represent possible form input of the HSBC affordability resid
 
 ## Assumptions
 
-I have assumed that the test only needed to verify whether lending would be given or not. I have observed that several of the inputs do not seem to affect the lending calculation, such as postcode and marital status. I have nonetheless included them in the allowed range of input as well as handling input actions. If necessary, I could have tested these inputs by checking the "Printer Friendly Version" results and verifying that corresponding values are present.
+I have assumed that the test only needed to verify whether lending would be given or not. I have observed that several of the inputs do not seem to affect the lending calculation, such as postcode and marital status. I have nonetheless included them in some scenarios in the allowed range of input as well as handling input actions. If necessary, I could have tested these inputs by checking the "Printer Friendly Version" results and verifying that corresponding values are present.
 
 I have assumed that for the purpose of this assignment, the data setup was not too important, thus I used a simple `testData` file containing the input data rather than a database.
+
+For the HSBC calculator, I used the [calculator page URL](https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php) rather than the [page that launches the calculator](https://intermediaries.hsbc.co.uk/calculator/), provided by the assignment. I assumed that for the takehome assignment that I should be more concerned about the lending results rather than considering how the user navigates to the calculator. However in a real-world scenario I might consider how the user should navigate to the calculator for a more appropriate end-to-end test.
 
 I have assumed that this test only needs to focus on one calculator rather than multiple calculators.
 

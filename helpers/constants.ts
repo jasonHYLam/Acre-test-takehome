@@ -1,6 +1,7 @@
+export const START_PAGE_URL = "https://intermediaries.hsbc.co.uk/calculator/";
+
 export const CALCULATOR_URL =
   "https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php";
-export const TITLE = "Affordability Calculator | HSBC UK for Intermediaries";
 
 export const NO_LENDING_MESSAGE = "NOT AVAILABLE";
 

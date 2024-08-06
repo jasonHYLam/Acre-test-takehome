@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 import { testData } from "./testData/testData";
 
-import { CALCULATOR_URL } from "../helpers/constants";
+import { CALCULATOR_URL, START_PAGE_URL } from "../helpers/constants";
 import { handleMortgageDetails } from "../helpers/handleMortgageDetails";
 import { handleIncomeDetails } from "../helpers/handleIncomeDetails";
 import { handleExpenditureDetails } from "../helpers/handleExpenditureDetails";
