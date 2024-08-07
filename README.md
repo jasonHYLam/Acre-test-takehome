@@ -8,7 +8,7 @@ I have written a table-driven end-to-end test that handles multiple scenarios fo
 
 I have used the [Playwright library](https://playwright.dev/) for its ease of end-to-end testing, and wrote the tests specifically for the [HSBC affordability residential calculator](https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php).
 
-I have created several scenarios based on different combinations of inputs, for both lending and no lending. These scenarios include:
+I have created several scenarios based on different combinations of inputs, for both lending and no lending. These scenarios were created to demonstrate the range of data provided, cases where lending is just valid/invalid, and cases where not enough details are provided. These scenarios include:
 
 ### Lending:
 
@@ -27,7 +27,7 @@ The test then compares the actual results with the expected results provided, us
 
 The input data is provided in the `inputData.ts` file. I believe this would suffice for a takehome assignment as I have interpreted the purpose of the assignment to focus more on the data's types and range rather than the way it is setup, however in a real-world scenario for end-to-end testing I might obtain the data from a database especially when performing read/write database operations.
 
-The input data can represent possible form input of the HSBC affordability residential calculator form. Types are introduced to ensure that the structure of the data is consistent. To ensure flexibility, all the input data are nullable such that data can be omitted if unnecessary. Additionally, the use of union types ensure that certain input is restricted to expected values, which is useful for select input types such as Marital Status, Maximum LTV etc.
+The input data can represent possible form input of the HSBC affordability residential calculator form. Types are introduced in `types.ts` to ensure that the structure of the data is consistent. To ensure flexibility, all the input data are nullable such that data can be omitted if unnecessary for the scenario. Additionally, the use of union types ensure that certain input is restricted to expected values, which is useful for select input types such as Marital Status, Maximum LTV etc.
 
 ## Assumptions
 
