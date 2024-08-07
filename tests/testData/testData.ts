@@ -2,8 +2,8 @@ import { TestEntry } from "../../helpers/types";
 
 import { NO_LENDING_MESSAGE } from "../../helpers/constants";
 
-// Input data is an array containing testEntry objects. These objects contain properties representing the test name, input details (providedDetails) and expected results (expectedResult)
-// The provided details property has an object that represents the given calculator categories, including mortgage details, income details and expenditure details.
+// Input data is an array containing testEntry objects. These objects contain the test name, input details (providedDetails) and expected results (expectedResult).
+// The provided details property containing the calculator input categories, including mortgage details, income details and expenditure details.
 // Each of these categories contain all possible inputs.
 
 export const testData: TestEntry[] = [

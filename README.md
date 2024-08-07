@@ -4,11 +4,9 @@ Takehome assignment for Acre test role.
 
 ## Overview
 
-I have written a table-driven end-to-end test that handles multiple scenarios for usage of an affordability calculator, as directed by the assignment brief. The table-driven test approach takes a collection of test entries and loops through it to perform the same test for each loop iteration. My test entries contain input data (with type of `ProvidedDetails`), expected results (with type of `ExpectedResult`) and test names. The test is split up into different modules to handle filling the form inputs for the corresponding input data and to check the results by comparing the expected results with the actual results. To handle different scenarios when different combinations of inputs are provided, there are many conditional statements, one for each form input.
+I have written a table-driven end-to-end test that handles multiple scenarios for usage of an affordability calculator, as directed by the assignment brief. The table-driven test approach takes a collection of test entries and loops through it to perform the same test for each loop iteration. My test entries contain input data (with type of `ProvidedDetails`), expected results (with type of `ExpectedResult`) and test names. The test is split up into different modules to handle filling the form inputs for the corresponding input data and to check the results by comparing the expected results with the actual results. The results to be compared are lending based on affordability, resultant LTV and lending based on property; the expected results must match exactly with the actual results to pass the corresponding test. To handle different scenarios when different combinations of inputs are provided, there are many conditional statements, one for each form input.
 
 I have used the [Playwright library](https://playwright.dev/) for its ease of end-to-end testing, and wrote the tests specifically for the [HSBC affordability residential calculator](https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php).
-
-I have used the Page Object model to perform actions on various parts of the page such as clicking buttons and filling inputs, and obtaining values from the page (using locators) to compare to the expected results for assertions.
 
 I have created several scenarios based on different combinations of inputs, for both lending and no lending. These scenarios include:
 
@@ -61,13 +59,13 @@ I have separated concerns by putting constants, types, and util helper functions
 
 As the test file grew, I split up the test file into separate modules with single responsibilities to make the test file easier to read. These modules are `handleMortgageDetails`, `handleIncomeDetails`, `handleExpenditureDetails` and `checkResults`.
 
-I had originally created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I later found out that this may not be necessary, but have kept it to show how I would approach reducing boilerplate code. I have given descriptive and meaningful names for each.
+I had originally created a number of helper functions to reduce improve code reuse, readability, modularity and extendability. For instance, `clickAndEnterNumericalInput` reduces the boilerplate code required to enter numerical input for the calculator. I later found out that this may not be necessary, but have kept it to show how I would approach reducing boilerplate code. Most of the helper functions were later deemed to be unnecessary, as they were originally used to help determine which conditional statements in `checkResults` would occur. However I have kept them to show how I would approach breaking down a problem into small steps. I have given descriptive and meaningful names for each.
 
-My original approach did not use `expectedResult` and thus required general expected results, such as if `lendingBasedOnAffordability` was greater than 0 or was `NOT AVAILABLE`. This required nested conditional statements which were very hard to follow. These conditional statements required a number of helper functions such as `checkValidMortgageDetailsForLending`, to help determine when these scenarios would occur. Introducing `expectedResult` to each `testEntry` meant that the test result could be compared to the `expectedResult`. This removed the need for the nested conditional statements, which drastically simplified the code.
-
-I have separated the major aspects of the test into separate modules that handle one responsibility. These modules are `handleMortgageDetails`, `handleIncomeDetails`, `handleExpenditureDetails` and `checkResults`.
+My original approach did not use `expectedResult` and thus required general expected results for the assertions in `checkResults`, such as if `lendingBasedOnAffordability` was greater than 0 or was `NOT AVAILABLE`. This required nested conditional statements which were very hard to follow. These conditional statements required a number of helper functions such as `checkValidMortgageDetailsForLending`, to help determine when these scenarios would occur. Introducing `expectedResult` to each `testEntry` meant that the test result could be compared to the `expectedResult`. This removed the need for the nested conditional statements, which drastically simplified the code.
 
 I have considered various edge cases, including cases when mortgage details aren't provided, various income details aren't provided, or when all details aren't provided.
+
+I have used the Page Object model to perform actions on various parts of the page such as clicking buttons and filling inputs, and obtaining values from the page (using locators) to compare to the expected results for assertions.
 
 I have written comments throughout the project to provide insight into my thought process, however in a real-world scenario I would remove the comments.
 
@@ -76,8 +74,6 @@ I have used the Prettier VSCode extension for formatting code.
 ## Challenges
 
 I do not know the exact workings of the calculator and the relationship between income, expenditure and mortgage details. I wasn't sure how much expenditure leads to no lending with certain values of income and mortgage property value. That being said I attempted to model these relationships with simple ratios, such as `maximum expenditure to income ratio for lending`. I have attempted to write scenarios with different values for each category, such that lending is either given or not given.
-
-There were many edge cases due to the complex relationship between income, expenditure and properties. For instance, when expenditure is extremely low (£1) and income is at the minimum required for lending (£10000), that results in no lending despite being far lower than the `maximum expenditure to income ratio for lending`.
 
 ## Build and Run
 
