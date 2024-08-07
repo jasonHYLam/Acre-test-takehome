@@ -53,7 +53,7 @@ To create scenarios, I interacted with the calculator with different combination
 - minimum income to property ratio (estimated): 0.02
 - maximum expenditure to income ratio (estimated): 0.48
 
-I have used these thresholds to create some scenarios for the test.
+I have used these thresholds to create some scenarios for the test. I understand that these may be unique to the HSBC calculator.
 
 I have separated concerns by putting constants, types, and util helper functions in their respective files and importing them where necessary.
 
