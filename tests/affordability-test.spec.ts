@@ -9,8 +9,7 @@ import { handleIncomeDetails } from "../helpers/handleIncomeDetails";
 import { handleExpenditureDetails } from "../helpers/handleExpenditureDetails";
 import { checkResults } from "../helpers/checkResults";
 
-// Table test which takes array of input and applies the same test to each.
-// Input data is an object containing objects representing calculator categories, such as mortgageDetails and incomeDetails.
+// Table test which takes array of testEntries and performs the same test on each.
 
 testData.forEach((testEntry) => {
   const { testName, providedDetails, expectedResult } = testEntry;

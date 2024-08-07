@@ -2,6 +2,9 @@ import { Page } from "@playwright/test";
 import { AllIncomeDetails, IncomeDetails } from "./types";
 import { clickAndEnterNumericalInput } from "./utils";
 
+// Module that handles filling in income details on the form.
+// If the testEntry contains a particular valid input data, the corresponding form input is filled with that data.
+
 export async function handleIncomeDetails(
   page: Page,
   allIncomeDetails: AllIncomeDetails

@@ -2,6 +2,9 @@ import { Page } from "@playwright/test";
 import { AllExpenditureDetails, ExpenditureDetails } from "./types";
 import { clickAndEnterNumericalInput } from "./utils";
 
+// Module that handles filling in expenditure details on the form.
+// If the testEntry contains a particular valid input data, the corresponding form input is filled with that data.
+
 export async function handleExpenditureDetails(
   page: Page,
   allExpenditureDetails: AllExpenditureDetails

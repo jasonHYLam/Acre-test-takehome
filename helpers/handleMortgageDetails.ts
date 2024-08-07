@@ -2,6 +2,9 @@ import { Page } from "@playwright/test";
 import { MortgageDetails } from "./types";
 import { clickAndEnterNumericalInput } from "./utils";
 
+// Module that handles filling in mortgage details on the form.
+// If the testEntry contains a particular valid input data, the corresponding form input is filled with that data.
+
 export async function handleMortgageDetails(
   page: Page,
   mortgageDetails: MortgageDetails
