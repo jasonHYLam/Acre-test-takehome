@@ -8,7 +8,7 @@ I have written a table-driven end-to-end test that handles multiple scenarios fo
 
 I have used the [Playwright library](https://playwright.dev/) for its ease of end-to-end testing, and wrote the tests specifically for the [HSBC affordability residential calculator](https://portal.intermediaries.hsbc.co.uk/affordabilitycalculator/affordabilitycalculatorpage.php).
 
-I have created several scenarios based on different combinations of inputs, for both lending and no lending. These scenarios were created to demonstrate the range of data provided, cases where lending is just valid/invalid, and cases where not enough details are provided. These scenarios include:
+I have created several scenarios based on different combinations of inputs, for both lending and no lending. These scenarios were created to demonstrate the range of data provided, cases where lending is just valid/invalid, and cases where not enough details/invalid values are provided. These scenarios include:
 
 ### Lending:
 
